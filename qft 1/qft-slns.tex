@@ -1,0 +1,2480 @@
+% !TeX program = luatex
+% Finished mode.
+\documentclass[a4paper]{article}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{enumitem}
+\usepackage{flowfram}
+\usepackage{lipsum}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{pifont}
+%\usepackage{mathabx}
+\usepackage{hhline}
+\usepackage[nice]{nicefrac}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{tikz-feynman}
+\usepackage{simpler-wick}
+%% cose cursed
+\pgfmathdeclarerandomlist{MyRandomColors}{%
+    {red}%
+    {blue}%
+    {cyan}%
+    {orange}%
+    {yellow}%
+}%
+%what
+\tikzset{rubout/.style={preaction={draw=white,line width=3pt}}}
+%%% fine cose cursed
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{tensor}
+\usepackage{cancel}
+\usepackage{siunitx}
+% figure support
+\usepackage{transparent}
+\usepackage{slashed}
+%evaluate symbol
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\usepackage[a4paper, total={16cm, 24cm}]{geometry}
+\usepackage{amsmath,thmtools}
+\usepackage{physics}
+\usepackage{textgreek}
+\usepackage[most]{tcolorbox}
+%\title{QMFS Exercises}
+\title{QFT final problems}
+\date{\today}
+\author{Marco Bella}
+
+\DeclareSIUnit\ev{eV}
+
+\declaretheoremstyle[
+  headfont=\color{Bittersweet}\normalfont\bfseries,
+  bodyfont=\color{NavyBlue}\normalfont\itshape,
+]{colored}
+\declaretheorem[
+  name=Remark,
+]{rmk}
+\declaretheorem[
+  name=Proposition,
+]{prop}
+
+\declaretheorem[
+  name=Definition,
+]{definition}
+
+\declaretheorem[
+  name=Lemma,
+]{lemma}
+
+\declaretheorem[
+  style=colored,
+  name=Exercise,
+]{exercise}
+\begin{document}
+\maketitle
+\section{Exercise 1}%
+    \begin{exercise}
+        When quantizing the electromagnetic field in a covariant form, we used a Lagrangian of this form:
+        \begin{align}
+        \mathcal{L}_0= -\frac{1}{2}\partial ^{\nu}A^\mu \, \partial _{\nu}A_\mu  
+        \end{align}
+Show that the alternative Lagrangian:
+\begin{align}
+\mathcal{L} = -\frac{1}{4}F^{\nu\mu}F_{\nu\mu}- \frac{1}{2} (\partial _\mu A^{\mu}
+)^2  \label{1.2}
+\end{align}
+would have produced the same quantization.
+    \end{exercise}
+    This is seen most simply by showing that the Lagrangians produce the same action.
+    Explicitly, the Lagrangian \eqref{1.2} can be expanded as\footnote{using comma
+    notation for derivatives ($\partial _\mu f^{\nu} = \tensor[]{f}{^{\nu}_{,\mu}} $) and
+    introducing antisymmetric brackets as $f_{[\mu\nu]}= f_{\mu\nu} - f_{\nu\mu}$.}
+    \begin{align}
+        \mathcal{L} &= -\frac{1}{4} A_{\left[\mu,\nu\right]}A^{\left[\mu,\nu\right]} -
+        \frac{1}{2} \left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2\nonumber \\ &=
+-      \frac{1}{4}  \left(A_{\mu,\nu}- A_{\nu,\mu}\right)\left(A^{\mu,\nu} - A^{\nu,\mu}\right) -
+        \frac{1}{2} \left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2\nonumber \\ 
+        &= -\frac{1}{4}\left(A_{\mu,\nu}A^{\mu,\nu} - A_{\mu,\nu}A^{\nu,\mu} -
+        A_{\nu,\mu}A^{\mu,\nu} + A_{\nu,\mu}A^{\nu,\mu}\right) -
+        \frac{1}{2}\left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2.
+    \end{align}
+    Relabelling dummy indices yields
+    \begin{align}
+        \mathcal{L} = -\frac{1}{2} A_{\mu,\nu}A^{\mu,\nu} + \frac{1}{2} A_{\mu,\nu}
+        A^{\nu,\mu} - \frac{1}{2} \left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2. \label{1.3}
+    \end{align}
+    We can now integrate by parts twice on the second term:
+    \begin{align}
+        \mathcal{L} &= -\frac{1}{2} A_{\mu,\nu}A^{\mu,\nu} - \frac{1}{2} A_{\mu}
+               \tensor[]{A}{^{\nu}^{,\mu}_{\nu}} - \frac{1}{2} \left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2 \nonumber \\ 
+        &= -\frac{1}{2} A_{\mu,\nu}A^{\mu,\nu} - \frac{1}{2} A_{\mu}
+        \tensor[]{A}{^{\nu}_{,\nu}^{\mu}} - \frac{1}{2} \left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2 \nonumber \\ 
+        &= -\frac{1}{2} A_{\mu,\nu}A^{\mu,\nu} + \frac{1}{2} \tensor[]{A}{_\mu^{,\mu}}
+        \tensor[]{A}{^{\nu}_{,\nu}}- \frac{1}{2}
+        \left(\tensor[]{A}{^{\rho}_{,\rho}}\right)^2 , 
+    \end{align}
+    where in the second line I employed Schwarz's theorem, commuting partial derivatives,
+    and all the equalities are understood in terms of the action (assuming boundary terms
+    to vanish upon integration, as is customary in field theories).
+    The second and third term in the last line cancel out and we retrieve the Lagrangian
+    $\mathcal{L}_0$.
+
+    If the Lagrangians are equivalent, the theories coincide even at a classical level. 
+
+  %  I
+  %  still went and looked at what happens when we try to quantise the theory, for the spirit of the
+  %  exercise.
+
+%    This
+%    Lagrangian calls for the same quantisation procedure as the classroom case, namely
+%    the Gupta-Bleuler approach.
+%
+%    We can start
+%        off by computing the Euler-Lagrange equations. Starting from \eqref{1.3},
+%    \begin{align}
+% \frac{\partial \mathcal{L}}{\partial \left(A_{\mu,\nu}\right)} &= -\frac{1}{2} \frac{\partial
+% }{\partial\left(A_{\mu,\nu}\right)}\left(A_{\rho,\sigma}A^{\rho,\sigma} - A_{\sigma,\rho}A^{\rho,\sigma} +
+%\tensor[]{A}{^{\rho}_{,\rho}}\tensor[]{A}{^{\sigma}_{,\sigma}}\right)\nonumber \\ 
+%&= -2 \frac{1}{2} \left(\delta_{\rho}^{\mu}\delta_{\sigma}^{\nu}A^{\rho,\sigma} -
+%\delta_{\sigma}^{\mu}\delta_{\rho}^{\nu}A^{\rho,\sigma} +
+%\eta^{\rho\mu}\delta_{\rho}^{\nu}\tensor[]{A}{^{\sigma}_{,\sigma}}\right)\nonumber \\ 
+%&= -A^{\mu,\nu} + A^{\nu,\mu} -
+%\eta^{\mu\nu}\tensor[]{A}{^{\sigma}_{,\sigma}}. \label{1.6}
+%    \end{align}
+%    Differentiating:
+%    \begin{align}
+%0&\overset{\text{(EL)}}{=}   \partial _\nu \left(\frac{\partial \mathcal{L}}{\partial \left(A_{\mu,\nu}\right)}
+%        \right)= - \tensor[]{A}{^{\mu,\nu}_{\nu}}  + \tensor[]{A}{^{\nu,\mu}_{\nu}} -
+%        \eta^{\mu\nu}\tensor[]{A}{^{\sigma}_{,\sigma}_{\nu}}.
+%    \end{align}
+%    Manipulating the last term ($\eta^{\mu\nu}\tensor[]{A}{^{\sigma}_{,\sigma\nu}} =
+%    \tensor[]{A}{^{\sigma}_{,\sigma}^{\mu}} = \tensor[]{A}{^{\nu}_{,\nu}^{\mu}} =
+%    \tensor[]{A}{^{\nu}^{,\mu}_{\nu}}$) we see that it cancels with the second one. Thus the
+%    equations of motion reduce to
+%    \begin{align}
+%            \square A^{\mu}=0.
+%    \end{align}
+%    This is the usual set of KG equations, whose solution was discussed thoroughly in
+%    class (hence I will just skim through this bit). In particular one goes to momentum
+%    space, where the equations reduce to the
+%    (massless) particle on-shell relation, $p^2 = 0$, and goes back to coordinate space
+%    via plane wave superposition. Since our $A^{\mu}$ is a 4-vector, we will decompose it
+%    on a basis of polarisation 4-vectors $\varepsilon_\lambda^{\mu}(p)$:
+%    \begin{align}
+%        A^{\mu}= \int \frac{\mathop{d^3p} }{(2\pi)^3}\frac{1}{\sqrt{2\omega_p} }
+%        \sum_{\lambda=0}^{3} \left( \varepsilon_\lambda^{\mu}(p) a_\lambda(p) e^{-i p\cdot x} +
+%        \text{h.c.}
+% \right) .    \end{align}
+% Quantisation follows as in class: we promote $\mathcal{L}, A^{\mu},a_\lambda(p)$ to
+% operators (introducing normal ordering as usual in the Lagrangian), and postulate
+% commutator relations between the fields and the conjugate momenta.
+%
+% In particular, the conjugate momenta are (from \eqref{1.6})
+% \begin{align}
+%     \Pi^{\mu}= \frac{\partial \mathcal{L}}{\partial \left(A_{\mu,0}\right)} = -A^{\mu,0}
+%     + A^{0,\mu}- \eta^{\mu 0 }\tensor[]{A}{^{\sigma}_{,\sigma}},
+% \end{align}
+% or
+% \begin{align}
+%     \Pi^{i}&= -F^{0i} \nonumber \\ 
+%     \Pi^{0}&= -\tensor[]{A}{^{\sigma}_{,\sigma}}.
+% \end{align}
+% All the conjugate momenta are nonzero. I impose equal-time commutator
+% relations between the field operators:
+% \begin{align}
+%     \left[A^{\mu}(x),\Pi^{\nu}(y)\right]_{x^{0}=y^{0}} &= i \eta^{\mu\nu} \delta^{(3)}
+%     (\textbf{x}-\textbf{y}),\nonumber \\ 
+%     \left[A^{\mu}(x),A^{\nu}(y)\right]_{x^{0}=y^{0}} &=
+%     \left[\Pi^{\mu}(x),\Pi^{\nu}(y)\right]_{x^{0}=y^{0}} =0 .
+%     \end{align}
+%     The next step is to show that these relations impose a certain algebra on the
+%     operators $a_\lambda (p), a_{\lambda^\prime}(p^\prime)$. I do this by reduction to a
+%     known problem, as inverting the explicit form of the conjugate momenta is cumbersome. In
+%     particular, one can see that 
+%     \begin{align}
+%      \left[A^{\mu}(x),\Pi^{\nu}(y)\right]_{x^{0}=y^{0}} &= i \eta^{\mu\nu} \delta^{(3)}
+%     (\textbf{x}-\textbf{y})       \implies
+%     \left[A^{\mu}(x),\dot{A}^{\nu}(y)\right]_{x^{0}=y^{0}} =- i \eta^{\mu\nu}
+%     \delta^{(3)}  (\textbf{x}-\textbf{y})\label{1.13}
+%     \end{align}
+%     Once that is cleared, one might as well forget about conjugate fields; the commutator
+%     relations for the ladder operators follow by virtue of the same calculation
+%     performed in class:
+%     \begin{align}
+%        \left[a_\lambda (p) , a^\dagger _{\lambda^\prime }(p^\prime )\right] = (2\pi)^3
+%        \delta^{(3)} (\textbf{p}- \textbf{p}^\prime)\delta_{\lambda \lambda^\prime
+%        }\alpha_\lambda.
+%     \end{align}
+%         The point behind \eqref{1.13} is that terms involving spatial derivatives vanish, due to the fact the
+%         field commutes with itself at equal times: terms vanish of the type
+%         \begin{align}
+%            \left[A^{\mu},\tensor[]{A}{^{\nu}_{,i}}\right]_{x^{0}= y^{0}}= \lim_{\varepsilon \to 0}
+%            \frac{\left[A^{\mu}(x^{0},\textbf{x}), A^{\nu}(x^{0}, \textbf{y}+\varepsilon
+%            \hat{\textbf{e}}_i)\right] - \left[A^{\mu}(x^{0},\textbf{x}),
+%            A^{\nu}(x^{0},\textbf{y})\right]}{\varepsilon} = \lim_{\varepsilon \to 0}
+%            \frac{0-0}{\varepsilon} = 0.
+%         \end{align}
+%         Thus, if $\nu=0$, 
+% \begin{align}
+%     [A^{\mu}(x), \Pi^{0}(y) ]_{x^{0}= y^{0}} &= - \left[A^{\mu}(x), \tensor[]{A}{^{0}_{,0}}(y)\right] +
+%     \left[A^{\mu}(x),\tensor[]{A}{^{i}_{,i}}(y)\right] \nonumber \\ 
+%     &= -  \left[A^{\mu}(x), \tensor[]{\dot{A}}{^{0}}(y)\right];
+% \end{align}
+% if $\nu = i $,
+% \begin{align}
+%     \left[A^{\mu}(x), A^{i}(y)\right]_{x^{0}= y^{0}} &= -\left[A^{\mu}(x),
+%     A^{i,0}(y)\right]+ \left[A^{\mu}(x), A^{0,i}(y)\right] \nonumber \\ 
+%     &= - \left[A^{\mu}(x), \dot{A}^{i}(y)\right].
+% \end{align}
+% Thus, for all $\nu$, $[A^{\mu}(x),\dot{A}^{\nu}(y) ] = [A^{\mu}(x),\Pi^{\nu}(y)] = -i
+% \eta^{\mu\nu}\delta^{3}(\textbf{x}-\textbf{y})$. This is the relation we worked with in
+% class. 
+%
+% From here onwards, all that matters is the field commutators, which lead
+% to the ladder operator algebra, and the equations of motion to restrict the Fock space of
+%physical states. We have just proven the two Lagrangian densities to produce the same
+%equations of motion and the same algebra. Thus they produce the same quantisation.
+\section{Exercise 2}%
+
+ \begin{exercise}
+    Consider two scalar, complex free fields, $\phi_{a,b}(x)$, with the same mass $m$, subject
+to the following action:
+\begin{align}
+\mathcal{S} = \int \mathop{d^4x}\left(\partial _\mu \phi_a ^{\star} \partial
+^{\mu}\phi_a +  \partial _\mu \phi_b ^{\star} \partial
+^{\mu}\phi_b +  m^2 \left(\phi_a^{\star}\phi_a + \phi_b^{\star}\phi_b\right) \right) 
+\end{align}
+\begin{itemize}
+    \item Show that the above action has 4 conserved charges. Define $Q$ as the
+    charge that is the obvious generalization of the charge of a single complex
+    field, and define the other three charges as $Q^{i}$. 
+    \item Find the commutation relations between the charges $Q^{i}$. What is the
+    underlying symmetry group? 
+\end{itemize}
+ \end{exercise}
+ For the sake of compactness, I will temporarily group the fields into 2-vectors (not
+ actually vectors, abuse of notation):
+ \begin{align}
+ \psi \coloneqq \begin{bmatrix} \phi_a \\ \phi_b \end{bmatrix} , \quad \psi^\dagger =
+\begin{bmatrix}  \phi_a^\star & \phi_b^\star \end{bmatrix}.
+ \end{align}
+ The Lagrangian density becomes
+ \begin{align}
+     \mathcal{L} = \partial _\mu \psi^\dagger  \partial ^\mu \psi + m^2 \psi^\dagger \psi
+     .
+ \end{align}
+ This Lagrangian is invariant under a global\footnote{In the sense
+ that $U$ is just a constant matrix, $\partial_\mu U = 0 $.} unitary transformation of the field 2-vector:
+ \begin{align}
+     \psi &\to U \psi, \nonumber \\ 
+     \psi^\dagger  &\to  \psi^\dagger U^\dagger \nonumber \\ 
+     \mathcal{L} &\to  \partial _\mu \psi^\dagger U^\dagger U \partial ^{\mu} \psi + m^2
+     \psi^\dagger U^\dagger U \psi  \nonumber \\ 
+     &=  \partial _\mu \psi^\dagger  \partial ^\mu \psi + m^2 \psi^\dagger \psi =
+     \mathcal{L}.
+ \end{align}
+The group of 2x2 unitary matrices is $U(2)$. The algebra of $U(2)$ is the vector space of 2x2
+hermitian matrices, as seen by writing $U(2) \ni M = \exp (i \varepsilon_\mu
+s^{\mu})$ for some matrices $s^{\mu}$:\footnote{This can always be done as unitary matrices are normal and thus
+diagonalisable. In diagonal form the matrix exponential is easily manipulated.} $M^\dagger = \exp (-i \varepsilon_\mu (s^\dagger )^{\mu})$. At any order in
+the matrix exponential, it must hold that $(s^\dagger )^{\mu}= s^{\mu}$. How many
+hermitian 2x2 matrices are there? We are free to pick two real numbers on the diagonal, and one complex number for the off-diagonal entries. So there are four. The basis choice
+falls naturally on 
+\begin{align}
+    s^{\mu}= \left(\mathbb{I}, \frac{ \boldsymbol{\sigma}}{2}\right).
+\end{align}
+    We can write an infinitesimal $U(2)$ transformation in terms of these generators:
+    \begin{align}
+        \Psi \to  \left(\mathbb{I} + i \varepsilon_\mu s^{\mu}\right)\Psi = \begin{cases}
+            \psi + i \varepsilon_0 \psi = \psi + \varepsilon_0 \delta \psi^{0} \\
+            \psi + \frac{i}{2} \varepsilon_j \sigma^{j} \psi = \psi + \varepsilon_j \delta
+            \psi^{j}.
+        \end{cases}
+    \end{align}
+The Noether currents take the form
+ \begin{align}
+    (j^{\mu})_\alpha &= \frac{\partial \mathcal{L}}{\partial \left(\partial ^{\alpha} \psi \right)}
+    \delta \psi ^{\mu} + \left(\delta \psi^{\mu} \right)^\dagger  \frac{\partial
+    \mathcal{L}}{\partial \left(\partial ^{\alpha} \psi^\dagger  \right)} \nonumber \\ 
+    &= \partial _\alpha \psi^\dagger \delta \psi^{\mu} + \left( \delta\psi^\dagger
+    \right)^{\mu} \partial _\alpha \psi \nonumber \\ 
+    &= \partial _\alpha \psi^\dagger  (i s^{\mu}) \psi + \text{h.c.} 
+\end{align}
+The conserved charges are 
+\begin{align}
+    Q &= \int \mathop{d^3x} (j^{0})_0 \nonumber \\ 
+    &= i \int \mathop{d^3x} \left( \partial _0 \psi^\dagger \psi - \psi^\dagger \partial
+    _0 \psi  \right) \nonumber \\ 
+    &= i \int \mathop{d^3x} \left(\dot{\psi}^\dagger \psi - \psi^\dagger \dot{\psi}\right) 
+\end{align}
+and, likewise,
+\begin{align}
+    Q^{i} &= \int \mathop{d^3x} (j^{i})_0 \nonumber \\ 
+    &= \frac{i}{2}\int \mathop{d^3x} \left( \dot{\psi}^\dagger  \sigma^{i}\psi -
+    \psi^\dagger \sigma^{i} \dot{\psi}\right)  .
+\end{align}
+As is customary, we can express the charge operator in terms of ladder operators. Here I
+found it favourable to bring back the scalar fields. 
+\begin{align}
+    Q^{\mu} = i\int \mathop{d^3x} \left(\dot{\phi}^\star_j (s^{\mu})^{jk}\phi_k
+    - \text{h.c.}\right) 
+\end{align}
+where Einstein summation is implicit on repeated high-low indices.
+The fields are
+\begin{align}
+    \phi_j &=\int \frac{\mathop{d^3p}}{(2\pi)^3}\frac{1}{\sqrt{2E_{p}}}
+    \left(a_{\textbf{p}j} e^{-ip\cdot x} + b_{\textbf{p} j }^\dagger e^{ip\cdot
+    x}\right)_{p^{0}= E_p},\nonumber \\ 
+   \dot{ \phi}_j &= \int
+   \frac{\mathop{d^3p}}{(2\pi)^3}\frac{1}{\sqrt{2E_{p}}}\left(a_{\textbf{p}j}(-i E_p)
+   e^{ip\cdot x} + b^\dagger _{\textbf{p}j}\left(i E_p\right)e^{ip\cdot x}\right)\nonumber \\ 
+   &= -i\int \frac{\mathop{d^3p}}{(2\pi)^3}\sqrt{\frac{E_p}{2}} 
+    \left(a_{\textbf{p}j} e^{-ip\cdot x} - b_{\textbf{p} j }^\dagger e^{ip\cdot
+    x}\right)_{p^{0}= E_p}.
+\end{align}
+Overall, the charges are 
+\begin{align}
+    Q^{\mu}&= i\int \mathop{d^3x}
+    \left(\left(s^{\mu}\right)^{jk}\dot{\phi}^\star_j \phi_k - \text{h.c.} \right)\nonumber \\ 
+    & = i \int \mathop{d^3x}  (+i)\int
+    \frac{\mathop{d^3p}}{(2\pi)^3}\sqrt{\frac{E_p}{2}}\int
+    \frac{\mathop{d^3q}}{(2\pi)^3}\frac{1}{\sqrt{2E_{q}}} \times \nonumber \\  
+    & \phantom{=} \times \left\{ \left(s^{\mu}\right)^{jk}\left[\left(a_{\textbf{p}j}^\dagger e^{ip\cdot x} -
+    b_{\textbf{p}j}e^{-ip\cdot x} \right)\left(a_{\textbf{q}k}e^{-iq\cdot x} +
+    b_{\textbf{q}k}^\dagger e^{iq\cdot x}\right)\right] + \text{h.c.}\right\} 
+    \end{align}
+    where the $- \text{h.c.}$ became a $+\text{h.c.}$ as I grouped a $+i$ outside. The integrals in $\mathop{d^3x} $ of the plane waves give $(2\pi)^3
+    \delta^{(3)}(\textbf{p} \pm \textbf{q})$. These deltas kill off the factor $\sqrt{E_p / E_q} $ as they
+    force $\left|\textbf{p}\right|= \left|\textbf{q}\right|$.
+    \begin{align}
+        Q^{\mu} &= - \int
+        \frac{\mathop{d^3p}}{(2\pi)^3}\frac{1}{2} \left\{\left( s^{\mu} \right)^{jk}\left[ a_{\textbf{p}j}^\dagger
+        a_{\textbf{p}k}+ a_{\textbf{p}j}^\dagger b_{-\textbf{p}k}^\dagger -
+        b_{\textbf{p}j}a_{-\textbf{p}k}- b_{\textbf{p}j}b_{\textbf{p}k}^\dagger
+       \right] +\text{h.c.} \right\}. 
+    \end{align}
+    The Hermitian conjugate of the first and last term gives back itself, due to the
+    hermiticity of the generators $s^{\mu}$: e.g. $( a^\dagger
+    _{\textbf{p}j}\left(s^{\mu}\right)^{jk}a_{\textbf{p}k} ) ^\dagger  =
+    a_{\textbf{p}k}^\dagger(s^{\mu})^{kj}a_{\textbf{p}j}$. This cancels the factor $1 /2$.
+    The Hermitian conjugate of the second and third term cross-cancel: e.g. the second
+    term becomes
+     \begin{align}
+        \left(a_{\textbf{p}j}^\dagger (s^{\mu})^{jk} b_{-\textbf{p}k}^\dagger
+        \right)^\dagger  = b_{-\textbf{p}k}(s^{\mu})^{kj} a_{\textbf{p}j}
+    \end{align}
+    which, upon substituting $\textbf{p}\to -\textbf{p}$, kills the third term. The same
+    fate awaits the other two terms; thus (dropping the overall minus sign for aesthetics)
+    \begin{align}
+        Q^{\mu} = \int \frac{\mathop{d^3p} }{(2\pi)^3} \left(a^\dagger
+        _{\textbf{p}j}\left(s^{\mu}\right)^{jk}a_{\textbf{p}k} - b^\dagger
+        _{\textbf{p}j}\left(s^{\mu}\right)^{jk}b_{\textbf{p}j}\right),
+    \end{align}
+    or
+    \begin{align}
+        \boxed{
+            Q = \int \frac{\mathop{d^3p} }{(2\pi)^3} \left(a^\dagger
+            _{\textbf{p}j}a_{\textbf{p}}^{j} - b^\dagger _{\textbf{p}j} b_{\textbf{p}}^{j}
+            \right)
+            }
+        \end{align}
+        and
+        \begin{align}
+        \boxed{
+            Q^{i}= \frac{1}{2}\int \frac{\mathop{d^3p} }{(2\pi)^3} \left(a^\dagger
+            _{\textbf{p}j}\left( \sigma^{i} \right) ^{jk}a_{\textbf{p}k} - b^\dagger
+            _{\textbf{p}j}\left( \sigma^{i} \right) ^{jk}
+            b_{\textbf{p}k} \right).
+            }
+    \end{align}
+    \subsection{Commutator relations}%
+    
+    Now onto the commutator relations. When commuting two charges, we will have to work
+    with commutators of the type
+    \begin{align}
+        \left[AB,CD\right] &= A\left[B,CD\right] + \left[A,CD\right]B \nonumber \\ 
+        &= AC\left[B,D\right] + A\left[B,C\right]D + \left[A,C\right]DB +
+        C\left[A,D\right]B, \label{2.35}
+    \end{align}
+    where $A, C$ are creation operators and  $B,D$ are annihilation operators. Thus the only
+    nonvanishing combinations in \eqref{2.35} are those commuting $A,D$ and  $B,C$.
+    \begin{align}
+        \left[Q^{\mu},Q^{\nu}\right] &= \int \frac{\mathop{d^3p}\mathop{d^3q}
+        }{(2\pi)^{6}}\left[a_{\textbf{p}i}^\dagger (s^{\mu})^{ij}a_{\textbf{p}j} -
+        \left(a\leftrightarrow b\right),a_{\textbf{q}k}^\dagger (s^{\nu})^{kl}a_{\textbf{q}l} -
+\left(   a\leftrightarrow b\right) \right]\nonumber \\ 
+&= \int \frac{\mathop{d^3p}\mathop{d^3q}  }{(2\pi)^{6}} a_{\textbf{p}i}^\dagger
+(\sigma^{\mu})^{ij} \left[a_{\textbf{p}j}, a_{\textbf{q}k}^\dagger \right](\sigma^{\nu})
+^{kl}a_{\textbf{q}l} + a^\dagger _{\textbf{q}k} (s^{\nu})^{kl}\left[a^\dagger
+_{\textbf{p}i}, a_{\textbf{q}l}\right](s ^{\mu})^{ij}a_{\textbf{p} j} +
+\left(a\leftrightarrow b\right) .
+    \end{align}
+The ladder operator algebra for two free complex scalar fields is
+\begin{align}
+    \left[a_{\textbf{p}j}, a_{\textbf{q}k}^\dagger \right] = (2\pi)^3
+    \delta_{jk}\delta^{(3)}(\textbf{p}-\textbf{q}), 
+\end{align}
+and the same with $(a\leftrightarrow b)$; thus
+\begin{align}
+    \left[Q^{\mu},Q^{\nu}\right] &= \int \frac{\mathop{d^3p} }{(2\pi)^3}
+    a_{\textbf{p}i}^\dagger (s^{\mu})^{ij} \delta_{jk}
+    (s^{\nu})^{kl}a_{\textbf{p}l} - a_{\textbf{p} k}^\dagger
+    (s^{\nu})^{kl}\delta_{il} (s^{\mu})^{ij}a_{\textbf{p}j} + (a\leftrightarrow
+    b)\nonumber \\ 
+    &= \int \frac{\mathop{d^3p}}{(2\pi)^3}a^\dagger _{\textbf{p}i}\tensor[]{(s^{\mu})}{^{i}_k}
+    (s^{\nu})^{kl} a_{\textbf{p}l} - a^\dagger _{\textbf{p} k}
+    \tensor[]{(s^{\nu})}{^{k}_i} (s^{\mu})^{ij}a_{\textbf{p}j} + (a\leftrightarrow b).
+\end{align}
+Relabelling dummy indices in the second term: $k \leftrightarrow i , l \leftrightarrow j$, 
+\begin{align}
+    \left[Q^{\mu},Q^{\nu}\right] &= \int \frac{\mathop{d^3p}}{(2\pi)^3}
+\left(     a_{\textbf{p}i}^\dagger  \tensor[]{\left[s^{\mu},
+    s^{\nu}\right]}{^{il}}a_{\textbf{p}l}  +   b_{\textbf{p}i}^\dagger  \tensor[]{\left[s^{\mu},
+    s^{\nu}\right]}{^{il}}b_{\textbf{p}l} \right)  . \label{2.38}
+\end{align}
+Our generators satisfy well-known commutator relations:
+\begin{align}
+\left[s^{0},s^{i}\right] &=   \left[\mathbb{I}, \frac{1}{2}\sigma^{i}\right]= 0\nonumber \\ 
+\left[s^{i},s^{j}\right]&= \frac{1}{4} \left[\sigma^{i},\sigma^{j}\right] =
+i\tensor[]{\varepsilon}{^{ij}_k} \frac{1}{2}\sigma^{k} =
+i\tensor[]{\varepsilon}{^{ij}_k}s^{k}.
+\end{align}
+When we insert these into \eqref{2.38}, we get
+\begin{align}
+    \boxed{
+        \left[Q,Q^{i}\right] = 0 
+        }
+\end{align}
+\begin{align}
+ \boxed{
+     \left[Q^{i},Q^{j}\right] = i\tensor[]{\varepsilon}{^{ij}_k} Q^{k}.
+     }
+\end{align}
+The conserved charges $Q^{i}$ satisfy the same Lie bracket as the generators of $SU(2)$.
+Thus they are generators of a representation of $SU(2)$.
+\section{Exercise 3}%
+\begin{exercise}
+   Starting from a real vector field $A^\mu$, the Proca density of Lagrangian is obtained
+by adding to the Maxwell Lagrangian a mass term:
+\begin{align}
+   \mathcal{L}  = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \frac{1}{2}m^2A_\mu A^{\mu}
+\end{align}
+with $m >0$. Discuss the quantization of such a theory. This exercise can
+be solved in different ways and the student can choose one of them (e.g. the
+canonical quantization, as done in the lectures for the electromagnetic field, or
+the particle quantization, as done for the scalar field). It is important to discuss:
+\begin{itemize}
+\item 
+{\color{NavyBlue}
+the gauge invariance of the Lagrangian: is this Lagrangian invariant under
+    $A_\mu \to  A_\mu + \partial _\mu f $?;
+    \item the equations of motion and their solutions;
+    \item the physical degrees of freedom of the quantized particles;
+    \item the commutation (or anticommutation) relation in spacetime and the
+    Feynman propagator. 
+}
+\end{itemize}
+\end{exercise}
+\subsection{Gauge invariance}%
+I will proceed with a canonical quantisation approach. For starters, the given Lagrangian
+is not gauge-invariant: upon 
+\begin{align}
+    A^{\mu}\to  A^{\mu}+ \partial ^{\mu} f,
+\end{align}
+the Lagrangian density becomes
+\begin{align}
+    \mathcal{L} &\to  -\frac{1}{4} \left(A_{\mu,\nu} + \cancel{f_{,\mu\nu}} - A_{\nu,\mu} -
+\cancel{    f_{,\nu\mu}} \right) \left(A^{\mu,\nu} + \cancel{f^{,\mu\nu} }- A^{\nu,\mu} -
+\cancel{f^{,\nu\mu}}\right)
+    + \frac{1}{2} m^2 \left(A_\mu + f_{,\mu}\right) \left(A^{\mu}+ f^{,\mu}\right)\nonumber \\ 
+    &= \mathcal{L} + \frac{1}{2}m^2 \left(A_\mu f^{,\mu} + f_{,\mu} A^{\mu}\right)\nonumber \\ 
+    &= \mathcal{L} + m^2 A^{\mu}f_{,\mu} \neq \mathcal{L}.
+\end{align}
+This lack of gauge-invariance means that the gauge degree of freedom has
+already been removed. All this can be justified, starting from the EOM. 
+
+\subsection{Equations of motion}%
+I will recycle
+some of the calculations from the first problem. The Maxwell term
+in the Lagrangian is the same as in \eqref{1.3}:
+\begin{align}
+    \mathcal{L} = -\frac{1}{2}A_{\mu,\nu}A^{\mu,\nu} + \frac{1}{2}A_{\mu,\nu}A^{\nu,\mu}+ \frac{1}{2}m^2 A_\mu A^{\mu}.
+\end{align}
+For the EL equations: the conjugate momenta are:
+    \begin{align}
+ \frac{\partial \mathcal{L}}{\partial \left(A_{\mu,\nu}\right)} &= -\frac{1}{2} \frac{\partial
+ }{\partial\left(A_{\mu,\nu}\right)}\left(A_{\rho,\sigma}A^{\rho,\sigma} -
+ A_{\sigma,\rho}A^{\rho,\sigma} - m^2 A_\mu A^{\mu}\right)\nonumber \\ 
+&= -2 \frac{1}{2} \left(\delta_{\rho}^{\mu}\delta_{\sigma}^{\nu}A^{\rho,\sigma} -
+\delta_{\sigma}^{\mu}\delta_{\rho}^{\nu}A^{\rho,\sigma}\right)\nonumber \\ 
+&= -A^{\mu,\nu} + A^{\nu,\mu} . \label{3.46}
+    \end{align}
+For EL we differentiate again:
+\begin{align}
+    \implies \partial _\nu \frac{\partial \mathcal{L}}{\partial
+    \left(A_{\mu,\nu}\right)}   &= -\tensor[]{A}{^{\mu}^{,\nu}_\nu}  +
+    \tensor[]{A}{^{\nu,\mu}_\nu};   \label{3.47}
+    \end{align}
+the other term in EL is
+    \begin{align}
+    \frac{\partial \mathcal{L}}{\partial A_\mu} &= \frac{1}{2}m^2 2 A^{\mu} = m^2
+    A^{\mu}.
+\end{align}
+The equations of motion then read
+\begin{align}
+\square A^{\mu} - \tensor[]{A}{^{\nu,\mu}_\nu} + m^2 A^{\mu}&=0.
+\end{align}
+As suggested, taking the four-divergence results in a further constraint:
+\begin{align}
+\cancel{   \tensor[]{A}{^{\mu,\nu}_\mu}}  - \cancel{\tensor[]{A}{^{\nu,\mu}_\nu}} + m^2
+   \tensor[]{A}{^{\mu}_{,\mu}} = 0.
+\end{align}
+This is just the Lorenz gauge condition:
+\begin{align}
+   \boxed{
+       \tensor[]{A}{^{\mu}_{,\mu}}  = 0,
+       }
+\end{align}
+which explains why gauge invariance is broken; in this gauge, the equations of motion reduce to Klein-Gordon:
+\begin{align}
+\boxed{
+    \square A^{\mu}  + m^2 A^{\mu}=0.
+    }
+\end{align}
+Moreover: from group theory we know that the 4-vector representation of the Lorentz group
+is $(1 /2, 1 /2) = \textbf{0}\oplus \textbf{1}$. Now, the Lorenz gauge, being a Lorentz-invariant
+condition, is also rotation invariant. But the
+degrees of freedom of an $SO(3)$ irreducible representation mix under rotations. Thus the
+constraint has to remove all of them, i.e. a complete representation. But it is only one
+constraint, thus it can only remove one degree of freedom. The only possibility is that it
+removes the scalar representation! In other words, whatever we quantise we are sure will
+be
+a massive spin-1 field.
+
+The solution to Klein-Gordon can be found as usual by moving into momentum space:
+\begin{align}
+    \left(\square + m^2\right)A^{\mu}&= 0 \nonumber \\ 
+   \int \frac{\mathop{d^4p}}{(2\pi)^4} (-p^2 + m^2) \tilde{A}^{\mu}e^{-i p\cdot x} &= 0.
+\end{align}
+This is the on-shell condition, satisfied for $\tilde{A}^{\mu}(p) = \delta(-p^2+m^2)C^{\mu}(p) $. 
+\begin{align}
+    A^{\mu}=  \int \frac{\mathop{d^4p}}{(2\pi)^4} C^{\mu}(p) \delta (-p^2 + m^2) e^{-i
+    p\cdot x}
+\end{align}
+Then we apply the celebrated delta function identity 
+\begin{align}
+    \delta(f(x)) = \sum_{i = \text{zeros}}
+    \frac{\delta(x-x_{i})}{\left|f^\prime(x_{i})\right|}.
+\end{align}
+In our case, $f(p^{0}) = - (p^{0})^2 + \textbf{p}^2+ m^2 $, $f^\prime = -2p^{0}$, and the two
+zeros are $p^{0}=  \pm (\textbf{p}^2 + m^2)^{1 /2}$. Thus
+\begin{align}
+    A^{\mu}=  \int \frac{\mathop{d^4p}}{(2\pi)^4} C^{\mu}(p) \frac{1}{2E_p}
+    \left[\delta\left(p^{0} - E_p \right) + \delta \left(p^{0}+
+    E_p\right)\right]e^{-ip\cdot x}.
+\end{align}
+Changing variable in the second term: $p^{0}\to -p^{0}$; performing the integral in $\mathop{dp^{0}} $
+\begin{align}
+    A^{\mu} = \int \frac{\mathop{d^3p}}{(2\pi)^3} \frac{1}{2E_p}
+    \left( \frac{C^{\mu}(E_p,\textbf{p})}{2\pi} e^{-ip\cdot x}  +
+    \frac{C^{\mu}(-E_p,\textbf{p})}{2\pi}e^{ip\cdot x}\right) _{p^{0}= E_p}.
+\end{align}
+For the field to be real it must hold that $C^{\mu} (-E_p ) = (C^{\mu}(E_p))^\star$. As
+usually done in the lecture, the quantum theory is more conveniently developed by choosing
+$C^{\mu}$ such that
+\begin{align}
+    A^{\mu} = \int \frac{\mathop{d^3p}}{(2\pi)^3} \frac{1}{\sqrt{2E_p} }
+\sum_\lambda    \left( a_{\lambda,\textbf{p}} \varepsilon^{\mu}_{\lambda} (p)e^{-ip\cdot x}  +
+    a_{\lambda,\textbf{p}}^\star (\varepsilon_\lambda^{\mu}(p))^\star e^{ip\cdot x}\right) _{p^{0}=
+    E_p}. \label{3.59}
+\end{align}
+What I did was simply reabsorb some coefficients and decompose $C^{\mu}$ on a basis of
+polarisation four-vectors
+$\varepsilon_\lambda (p)$. The Lorenz gauge condition tells us that
+\begin{align}
+0= \tensor[]{A}{^{\mu}_{,\mu}} = \int \frac{\mathop{d^3p}}{(2\pi)^3}\frac{1}{\sqrt{2E_p}
+}\sum_\lambda \left(a_\lambda \varepsilon^{\mu}_\lambda(p) (-i p_\mu) e^{-ip\cdot x} + \text{c.c.}\right)
+\end{align}
+or 
+\begin{align}
+    p_\mu \varepsilon^{\mu}_\lambda (p) = 0.
+\end{align}
+As foreshadowed, this takes one basis vector out of the game. I leave here an identity
+which I shall employ later.
+\begin{rmk}[Sum rule]
+If I pick a normalisation $(\varepsilon_\lambda)^{\mu} (\varepsilon_\lambda^\star)_{\mu} =
+-1$, then
+\begin{align}
+\boxed{
+    \sum _\lambda \left(\varepsilon_\lambda\right)_\mu (p)
+    \left(\varepsilon_\lambda^\star\right)_\nu(p) = -g_{\mu\nu} + \frac{p_\mu
+    p_\nu}{m^2}\label{3.62}
+    }
+\end{align}
+\end{rmk}
+\begin{proof}
+    I will compute the LHS in a given frame and then write the result in a covariant
+    form. If $p^{\mu} = (E_p,0,0,p_z)$, then I can pick
+    \begin{align}
+    \varepsilon_1 &= (0,1,0,0)\nonumber \\ 
+    \varepsilon_2 &= (0,0,1,0)\nonumber \\ 
+    \varepsilon_3 &= \frac{1}{m}(p_z,0,0,E_p).
+    \end{align}
+    These vectors satisfy my normalisation (there appears a minus sign on the spatial
+    components when taking the Minkowski product, plus $p_z^2 - E_p^2= -m^2$). Then
+    \begin{align}
+        \sum_\lambda (\varepsilon_\lambda)_\mu (\varepsilon_\lambda ^\star)_\nu
+        &=
+        \begin{pmatrix} 0\\ 1 \\0 \\0 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 & 0
+        \end{pmatrix} + 
+        \begin{pmatrix} 0\\ 0 \\1 \\0 \end{pmatrix} \begin{pmatrix} 0 & 0 & 1 & 0
+        \end{pmatrix} + 
+  \frac{1}{m^2}      \begin{pmatrix} p_z\\ 0 \\0 \\E_p \end{pmatrix} \begin{pmatrix} p_z & 0
+  & 0 & E_p
+        \end{pmatrix} \nonumber \\ 
+        &= \begin{pmatrix} 0&&&\\&1&&\\&&0&\\&&&0 \end{pmatrix} +\begin{pmatrix}
+        0&&&\\&0&&\\&&1&\\&&&0 \end{pmatrix} + \frac{1}{m^2}\begin{pmatrix} p_z^2
+        &&&p_zE_p\\&0&&\\&&0&\\p_zE_p&&&E_p^2 \end{pmatrix} .
+    \end{align}
+    Now, on the last term: $E_p^2 - p_z ^2 = m^2$ or
+    \begin{align}
+        \frac{p_z^2}{m^2} &= \frac{E_p^2}{m^2}-1,\nonumber \\ 
+        \frac{E_p^2}{m^2} &= \frac{p_z^2}{m^2}+1 .   
+        \end{align}
+        Thus
+        \begin{align}
+        \sum_\lambda (\varepsilon_\lambda)_\mu (\varepsilon_\lambda ^\star)_\nu
+        &= \begin{pmatrix} -1 &&&\\&1&&\\&&1&\\&&&1 \end{pmatrix} +
+        \frac{1}{m^2}\begin{pmatrix} E_p^2 &&&p_zE_p \\&0&&\\&&0&\\p_zE_p &&&p_z^2
+        \end{pmatrix} \nonumber \\ 
+        &= -g_{\mu\nu} + \frac{1}{m^2}p _\mu p_\nu.
+        \end{align}
+        The equation is now Lorentz covariant, thus it must hold in any frame.
+\end{proof}
+\subsection{Canonical quantisation}%
+For a healthy canonical quantisation, we need to check whether the Hamiltonian formalism
+of this theory is sound. In particular, I wish to prove that
+\begin{enumerate}
+    \item the Hamiltonian density is positive-definite (this should safeguard us against the existence
+    of arbitrarily-negative enrgy states after quantisation);
+    \item the Hamiltonian formalism is equivalent to the Lagrangian one.
+\end{enumerate}
+The conjugate momenta I find from \eqref{3.47}:
+\begin{align}
+    \Pi^{\mu} = \frac{\partial \mathcal{L}}{\partial \left(A_{\mu,0}\right)} =
+    -A^{\mu,0}+ A^{0,\mu} = -F^{0\mu}.
+\end{align}
+Thus arises an issue, in that $\Pi^{0} = 0$. Ideally, $A^{0}$ decouples from the dynamics,
+for then we need not quantise it. Let us try to write a Hamiltonian (density):
+\begin{align}
+    \mathcal{H} &= \Pi_0 \dot{A}^{0} + \Pi_{i}\dot{A}^{i} - \mathcal{L}\nonumber \\ 
+    &= \Pi_0 \dot{A}^{0} + \Pi_i \dot{A}^{i} + \frac{1}{4}F_{\mu\nu}F^{\mu\nu} -
+    \frac{1}{2}m^2 A_\mu A^{\mu}.
+\end{align}
+Expanding the Maxwell term:
+\begin{align}
+\frac{1}{4}F_{\mu\nu}F^{\mu\nu} &= \frac{1}{4} \left(F_{0\nu}F^{0\nu} +
+F_{i\nu}F^{i\nu}\right) \nonumber \\ 
+&= \frac{1}{4}(\underbrace{F_{0i}F^{0i}}_{(-)^2 \Pi_i \Pi^{i}} + \underbrace{F_{i0}F^{i
+0}}_{\Pi_i \Pi^{i}} + F_{ij}F^{ij}),
+\end{align}
+and 
+\begin{align}
+    F_{ij}F^{ij}&=  \left(A_{i,j}- A_{j,i}\right)\left(A^{i,j}-A^{j,i}\right)\nonumber \\ 
+&= A_{i,j}A^{i,j}+A_{j,i}A^{j,i} - A_{i,j}A^{j,i}- A_{j,i}A^{i,j}\nonumber \\ &= 2
+\left(A_{i,j}A^{i,j}- A_{i,j}A^{j,i}\right). \label{3.70}
+\end{align}
+Actually, for the moment I will need this term in a different form.  $F_{ij}=  A_{[i,j]}=
+\varepsilon_{ijk} (\boldsymbol{\nabla}\times \textbf{A})^{k}$ and thus
+\begin{align}
+    F_{ij}F^{ij} &= \varepsilon_{ijk}\tensor[]{\varepsilon}{^{ij}_l}
+    \left(\boldsymbol{\nabla}\times \textbf{A}\right)^{k}\left(\boldsymbol{\nabla}\times
+    \textbf{A}\right)^{l}\nonumber \\ 
+    &= 2\delta_{kl}\left(\boldsymbol{\nabla}\times \textbf{A}\right)^{k}\left(\boldsymbol{\nabla}\times
+    \textbf{A}\right)^{l}\nonumber \\ 
+    &= 2 \left(\boldsymbol{\nabla}\times \textbf{A} \right)^2,\label{3.71}
+\end{align}
+where I used the identity $\varepsilon_{ijk}\tensor[]{\varepsilon}{^{ij}_l} =
+2\delta_{kl}$.
+
+Recollecting all the bits,
+\begin{align}
+    \mathcal{H} = \Pi_0 \dot{A}^{0} + \Pi_i \dot{A}^{i} + \frac{1}{2}\Pi_i \Pi^{i} +
+    \frac{1}{2}\left(\boldsymbol{\nabla}\times \textbf{A}\right)^2 - \frac{1}{2}m^2 \left(
+    A^{0} \right) ^2 + \frac{1}{2}m^2 \left( A^{i} \right) ^2.
+\end{align}
+I have to get rid of $\dot{A}^{\mu}$. For $\dot{A}^{i}, $ I can invert the relation for
+$\Pi^{i}= -\dot{A}^{i}+A^{0,i}$:
+\begin{align}
+    \mathcal{H} &= \Pi_0 \dot{A}^{0} + \Pi_i (-\Pi^{i}+ \tensor[]{A}{^{0}^{,i}}) + \frac{1}{2}\Pi_i \Pi^{i} +
+    \frac{1}{2}\left(\boldsymbol{\nabla}\times \textbf{A}\right)^2 - \frac{1}{2}m^2
+    \left(
+    A^{0} \right) ^2 + \frac{1}{2}m^2 \left( A^{i} \right) ^2\nonumber \\ 
+    &= \Pi_0 \dot{A}^{0}(\Pi_{k},A^{k}) - \frac{1}{2}\Pi_i \Pi^{i} + \Pi_i \tensor[]{A}{^{0}^{,i}} +
+    \frac{1}{2}\left(\boldsymbol{\nabla}\times \textbf{A}\right)^2 - \frac{1}{2}m^2
+    \left(
+    A^{0} \right) ^2 + \frac{1}{2}m^2 \left( A^{i} \right) ^2.
+\end{align}
+So far, the Hamiltonian formalism is problematic. Hamilton's equations are
+\begin{align}
+&    \dot{A}^{i} = \frac{\delta \mathcal{H}}{\delta \Pi_i} , & & \dot{A}^{0} =
+\frac{\delta \mathcal{H}}{\delta \Pi_0} = 0, \nonumber \\ 
+&    \dot{\Pi}_{i} = -\frac{\delta \mathcal{H}}{\delta A^i} , & & \dot{\Pi}_{0} =
+-\frac{\delta \mathcal{H}}{\delta A^{0}} \neq  0.
+\end{align}
+Although $\Pi_0$ is identically zero, it evolves! The source of this discrepancy is the
+fact that I have kept $A^{0}$ as a dynamical variable, whereas its dynamics is determined
+by the other components (we do have 3 degrees of freedom, after all). The EL equation for
+$A^{0}$ reads
+\begin{align}
+0 &=\partial _\nu \frac{\partial \mathcal{L}}{\partial A_{0,\nu}} - \frac{\partial
+\mathcal{L}}{\partial A_{0}} ;
+\end{align}
+from \eqref{3.46} I know that $\partial \mathcal{L} / \partial  (A_{0,\nu}) = -A^{0,\nu} +
+A^{\nu,0} = F^{0,\nu} = - \Pi^{\nu}$:
+\begin{align}
+0&= -\cancel{\partial _0 \Pi^{0}}- \partial _i \Pi^{i} - m^2A^{0}  
+\end{align}
+or 
+\begin{align}
+    A^{0}= -\tensor[]{\Pi}{^{i}_{,i}} / m^2. \label{3.77}
+\end{align}
+Now I can remove $\Pi_0$ and substitute
+$A^{0}$ out from the Hamiltonian:
+\begin{align}
+    \mathcal{H}&= \cancel{\Pi_0 \dot{A}^{0}(\Pi_{k},A^{k})} - \frac{1}{2}\Pi_i \Pi^{i} + \Pi_i \tensor[]{A}{^{0}^{,i}} +
+    \frac{1}{2}\left(\boldsymbol{\nabla}\times \textbf{A}\right)^2 - \frac{1}{2}m^2
+    \left(
+    A^{0} \right) ^2 + \frac{1}{2}m^2 \left( A^{i} \right) ^2\nonumber \\ 
+    &= -\frac{1}{2}\Pi_i \Pi^{i} - \Pi_i
+   \frac{1}{m^2} (\tensor[]{\Pi}{^{j}^{,i}_j})+\frac{1}{2}\left(\boldsymbol{\nabla}\times
+    \textbf{A}\right)^2 - \frac{1}{2}\frac{m^2}{m^4} \left(\tensor[]{\Pi}{^{i}_{,i}}\right)^2 +
+    \frac{1}{2}m^2 (A^{i})^2.
+\end{align}
+I lower all the conjugate momenta spatial indices, paying a minus sign each time:
+\begin{align}
+    \mathcal{H}
+    &= +\frac{1}{2}\Pi_i \Pi_{i} - \Pi_i
+   \frac{1}{m^2} (\tensor[]{\Pi}{_{j}_{,j}_i})+\frac{1}{2}\left(\boldsymbol{\nabla}\times
+    \textbf{A}\right)^2 - \frac{1}{2m^2} \left(\tensor[]{\Pi}{_{i}_{,i}}\right)^2 +
+    \frac{1}{2}m^2 (A^{i})^2.
+\end{align}
+Integrating by parts the second term ($\Pi_i \Pi_{j,ij} = - \Pi_{i,i} \Pi_{j,j}$) and
+simplifying it with the fourth:
+\begin{align}
+    \boxed{
+        \mathcal{H} = \frac{1}{2}\left( \Pi_i  \right)^2 + \frac{1}{2m^2}\left( \Pi_{i,i} \right) ^2
+        +\frac{1}{2} \left(\boldsymbol{\nabla}\times \textbf{A}\right)^2 + \frac{1}{2}m^2
+        \left(A^{i}\right)^2.
+        }
+\end{align}
+\begin{rmk}
+    This Hamiltonian density is positive-definite! 
+\end{rmk}
+With that out of the way, I now show that
+the Hamiltonian formalism gives back the correct equations of motion. 
+\begin{rmk}
+   Hamilton's equations imply EL. 
+\end{rmk}
+\begin{proof}
+Changing back the
+third term $(\boldsymbol{\nabla}\times \textbf{A})^2 = (A_{i,j}A^{i,j} - A_{i,j}A^{j,i})$
+(from equations \eqref{3.70}, \eqref{3.71})
+\begin{align}
+        \mathcal{H} = \frac{1}{2}\left( \Pi_i  \right)^2 + \frac{1}{2m^2}\left( \Pi_{i,i} \right) ^2
+       +\frac{1}{2} (A_{i,j}A^{i,j}- A_{i,j}A^{j,i})+ \frac{1}{2}m^2
+        \left(A^{i}\right)^2,
+\end{align}
+Hamilton's equations (in functional form) read
+\begin{align}
+    \dot{\Pi}_i &= - \frac{\delta \mathcal{H}}{\delta A^{i}}\nonumber \\ 
+    &= -\left( \frac{\partial }{\partial A^{i}}  - \partial _j \frac{\partial }{\partial
+    (\partial _j A^{i}) }  \right)  \mathcal{H} \nonumber \\ 
+    &= - m^2 A_{i} + \frac{1}{2}\partial _j \frac{\partial
+    }{\partial(\tensor[]{A}{^{i}_{,j}})  }  \left(\tensor[]{A}{_{k,}^{l}}
+    \tensor[]{A}{^{k}_{,l}} - \tensor[]{A}{^{k}_{,l}}\tensor[]{A}{^{l}_{,k}}\right) \nonumber \\ 
+    &= -m^2 A_{i} + \frac{1}{2}\partial _j 2\left( \tensor[]{A}{_{i,}^{j}} -
+    \tensor[]{A}{^{j}_{,i}}\right) \nonumber \\ 
+    &= -m^2 A_{i} + \tensor[]{A}{_{i,}^{j}_j} - \tensor[]{A}{^{j}_{,ji}};\label{3.81}
+\end{align}
+and
+\begin{align}
+    \dot{A^{i}}&= \frac{\delta \mathcal{H}}{\delta \Pi_i} \nonumber \\ 
+    &= \left(\frac{\partial }{\partial \Pi_i} - \partial _j \frac{\partial }{\partial
+    (\partial _j \Pi_i) }  \right) \mathcal{H}\nonumber \\ 
+    &= \Pi_i - \frac{1}{2m^2} \partial _j \frac{\partial }{\partial \Pi_{i,j}}
+    \left(\Pi_{l,l}\Pi_{k,k}\right)\nonumber \\ 
+    &= \Pi_i - \frac{1}{m^2}\partial _j \Pi_{k,k}\delta_{ij}\nonumber \\ 
+    &= \Pi_i - \frac{1}{m^2}\Pi_{k,ki}. \label{3.82}
+\end{align}
+One sees that this set of equations implies EL by substituting \eqref{3.77}: $A^{0} =
+\tensor[]{\Pi}{^{i}_{,i}} / m^2 = + \Pi_{i,i} / m^2$
+\begin{align}
+\tensor[]{A}{^{i}_{,0}}&= \Pi_{i} - \tensor[]{A}{^{0}_{,i}},\nonumber \\ 
+\tensor[]{A}{^{i}_{,00}}&= \Pi_{i,0} - \tensor[]{A}{^{0}_{,0i}},
+\end{align}
+and using \eqref{3.81} for $\Pi_{i,0}$:
+\begin{align}
+    \tensor[]{A}{^{i}_{,00}} &= -m^2 A_i + \tensor[]{A}{_{i,}^{j}_j} - \tensor[]{A}{^{j}_{,ji}}
+    -\tensor[]{A}{^{0}_{,0i}}\nonumber \\ 
+    -\tensor[]{A}{_{i,}^{0}_0} &= -m^2 A_i + \tensor[]{A}{_{i,}^{j}_j} - \tensor[]{A}{^{j}_{,ji}}
+    -\tensor[]{A}{^{0}_{,0i}}.
+\end{align}
+Rearranging
+\begin{align}
+\tensor[]{A}{_{i,}^{0}_0} + \tensor[]{A}{_{i,}^{j}_j} - \tensor[]{A}{^{0}_{,0i}} -
+\tensor[]{A}{^{j}_{,ji}}  - m^2 A_i&=0\nonumber \\ 
+\square A_i - \tensor[]{A}{^{\mu}_{,\mu i }} - m^2 A_i &= 0
+\end{align}
+which is EL for the spatial components of $A_\mu$ (the dynamical components). 
+\end{proof}
+\subsubsection{Commutator relations}%
+We are working with a bosonic field, which we know translates to commutator relations. Promoting $A^{i},\Pi_j$ to operators, I
+would like them to satisfy the equal-time commutator relations:
+\begin{align}
+    \left[\hat{A}^{i}(x), \hat{\Pi}_j (y)\right]_{x^{0}= y^{0}} &\overset{!}{=} i \delta^{i}_j
+    \delta^{(3)}(\textbf{x}-\textbf{y})\nonumber \\ 
+    \left[\hat{A}^{i}(x), \hat{A}^j (y)\right]_{x^{0}= y^{0}} &\overset{!}{=} 0 \nonumber \\ 
+    \left[\hat{\Pi}_{i}(x), \hat{\Pi}_j (y)\right]_{x^{0}= y^{0}} &\overset{!}{=} 0.\label{3.87}
+\end{align}
+From an axiomatic standpoint I suppose it be best that I postulate these commutator
+relations and derive the ladder operator algebra as a consequence. I shall do the inverse,
+for the computation is significantly smoother (analogously to what was done in class). In
+particular: the expression for the field \eqref{3.59} is modified, promoting $A^{\mu}$ and
+thus $a_\lambda$ to operators:
+\begin{align}
+    \hat{A}^{\mu} = \int \frac{\mathop{d^3p}}{(2\pi)^3} \frac{1}{\sqrt{2E_p} }
+\sum_\lambda    \left( \hat{a}_{\lambda\textbf{p}}  \varepsilon^{\mu}_{\lambda} (p)e^{-ip\cdot x}  +
+    \hat{a}_{\lambda \textbf{p}}^\dagger  (\varepsilon_\lambda^{\mu}(p))^\star e^{ip\cdot x}\right)
+    _{p^{0}= E_p};
+\end{align}
+(dropping the hats from now on); I show now that
+\begin{prop}
+    If the operators $a_{\lambda \textbf{p}}, a_{\lambda \textbf{p}}^\dagger$ satisfy the following
+    algebra:
+    \begin{align}
+     [a_{\lambda\textbf{p}}, a_{\lambda^\prime \textbf{q}}^\dagger ]   &=
+    (2\pi)^3 \delta^{(3)}(\textbf{p}-\textbf{q}) \delta_{\lambda\lambda^\prime},\nonumber \\ 
+     \left[a_{\lambda\textbf{p}}, a_{\lambda^\prime \textbf{q}}\right]   &=0
+    \end{align}
+    then \eqref{3.87} is satisfied.
+\end{prop}
+\begin{proof}
+   Starting off easy:
+   \begin{align}
+       [A^{i},A^{j}] = \int \frac{\mathop{d^3p}}{(2\pi)^3}\int
+       \frac{\mathop{d^3q}}{(2\pi)^3}\frac{1}{\sqrt{2E_p 2E_q}
+       }\sum_{\lambda,\lambda^\prime} \left[a_{\lambda
+       \textbf{p}}\varepsilon_{\lambda}^{i} e^{-ip\cdot x} +\text{h.c.}, a_{\lambda^\prime
+       \textbf{q}}\varepsilon_{\lambda^\prime}^{j} e^{-iq\cdot y} +\text{h.c.}\right].
+   \end{align}
+   The commutators of the type $[a,a] $ and  $[a^\dagger ,a^\dagger ] $ vanish. All is left is
+   \begin{align}
+       [A^{i},A^{j}] = \int \frac{\mathop{d^3p}}{(2\pi)^3}\int
+       \frac{\mathop{d^3q}}{(2\pi)^3}\frac{1}{\sqrt{2E_p2E_q}
+       }\sum_{\lambda,\lambda^\prime}&\left[a_{\lambda \textbf{p}}, a_{\lambda^\prime
+       \textbf{q}}^\dagger\right]\varepsilon_\lambda^{i}(p)\left( \varepsilon_{\lambda^\prime}
+       ^\star\right) ^{j}(q)e^{-ip\cdot x}e^{iq\cdot y} +\nonumber \\ +& \left[a_{\lambda \textbf{p}}^\dagger , a_{\lambda^\prime
+       \textbf{q}}\right]\left( \varepsilon_\lambda ^\star\right) ^{i}(p)
+       \varepsilon_{\lambda^\prime}
+        ^{j}(q)e^{ip\cdot x}e^{-iq\cdot y} .
+   \end{align}
+   These cancel exactly: the LHS is anti-hermitian ($[A^{i},A^{j}]^\dagger  =
+   \left(A^{i}A^{j}- A^{j}A^{i}\right)^\dagger  = ( A^{j}) ^\dagger (A^{i})^\dagger -
+   (A^{i})^\dagger (A^{j})^\dagger  = -[A^{i,}A^{j}]$) and the RHS is hermitian: the
+   commutator contains a $\delta_{\lambda\lambda^\prime}$ and a
+   $\delta^{(3)}(\textbf{p}-\textbf{q})$, reducing the polarisation sum
+   to the one in \eqref{3.62}, which is symmetric under $i\leftrightarrow j$. Thus the second term is the
+   h.c. of the first. The only operator that is both hermitian and anti-hermitian is 0.
+   %the commutators force $\lambda = \lambda^\prime$ and $\textbf{p}
+   %= \textbf{q}$. Then we get a polarisation sum of the type \eqref{3.62}, symmetric upon
+   %$i\leftrightarrow j$. The remaining momentum space integral takes care of the plane
+   %waves, turning them into the same Dirac delta. The cancellation is due to the second
+   %commutator picking up a minus sign due to antisymmetry.
+
+   For the other field commutators, we need to evaluate $\Pi_i$
+   \begin{align}
+       \Pi_i &= -\dot{A}_{i} + A_{0,i} \nonumber \\ 
+       &= \int \frac{\mathop{d^3p}}{(2\pi)^3} \frac{1}{\sqrt{2E_p} } \sum_\lambda
+       \left[a_{\lambda \textbf{p}}\left(-\varepsilon_{\lambda i}\partial _t +
+       \varepsilon_{\lambda 0}\partial _i  \right)e^{-ip\cdot x}+ \text{h.c.}\right]\nonumber \\ 
+       &= \int \frac{\mathop{d^3p}}{(2\pi)^3}\frac{1}{\sqrt{2E_p} }\sum_\lambda
+       [a_{\lambda \textbf{p}}(-\varepsilon_{\lambda i} (-iE_p ) + \varepsilon_{\lambda 0}
+       ip_i) e^{-ip\cdot x}+\text{h.c.}]\nonumber \\ 
+       &\coloneqq i\int \frac{\mathop{d^3p}}{(2\pi)^3}\sqrt{\frac{E_p}{2}} \sum_\lambda
+       [a_{\lambda \textbf{p}}\tilde{\varepsilon}_{\lambda i} e^{-ip\cdot x}-\text{h.c.}]
+   \end{align}
+   where $+\text{h.c.}$ becomes $-\text{h.c.}$ after grouping $i$ outside, and I have defined 
+   \begin{align}
+      \tilde{ \varepsilon}_{\lambda i}(p) \coloneqq \varepsilon_{\lambda i}(p) +
+      \frac{p_i}{E_p}\varepsilon_{\lambda 0 }(p).
+   \end{align}
+   The commutator  $[\Pi_i,\Pi_j]$ is worked out in the same way as the previous one: the
+   terms with $[a,a]$ and  $[a^\dagger ,a^\dagger ] $ die and all is left is
+   \begin{align}
+       [\Pi_i, \Pi_j] = -i^2\int \frac{\mathop{d^3p}}{(2\pi)^3}\int
+       \frac{\mathop{d^3q}}{(2\pi)^3} \sqrt{\frac{E_p E_q}{4}} 
+       \sum_{\lambda,\lambda^\prime}&\left[a_{\lambda \textbf{p}}, a_{\lambda^\prime
+       \textbf{q}}^\dagger\right]\left( \tilde{\varepsilon}_\lambda \right) _{i}\left( \tilde{\varepsilon}_{\lambda^\prime}
+       ^\star\right) _{j}e^{-ip\cdot x}e^{iq\cdot y} +\nonumber \\ +& \left[a_{\lambda \textbf{p}}^\dagger , a_{\lambda^\prime
+       \textbf{q}}\right]\left( \tilde{\varepsilon}_\lambda ^\star\right) _{i}
+       \left( \tilde{\varepsilon}_{\lambda^\prime} \right) 
+        _{j}e^{ip\cdot x}e^{-iq\cdot y} .
+   \end{align}
+   If the new polarisation sum is symmetric under $i\leftrightarrow j$, we can make the
+   same argument as before. The new polarisation sum is
+   \begin{align}
+   \sum _\lambda (\tilde{\varepsilon}_\lambda)^{i} (\tilde{\varepsilon}_\lambda^\star)^j
+   &=\sum_\lambda \left(\varepsilon_\lambda ^{i} +\frac{p^i}{E_p}\varepsilon_\lambda^{0}\right)
+   \left(\left( \varepsilon_\lambda ^\star\right)^{j} +
+   \frac{p^j}{E_p}\left(\varepsilon_\lambda^\star\right)^{0} \right)\nonumber \\ 
+   &= \sum_\lambda\varepsilon_{\lambda}^{i}\left(\varepsilon_\lambda^\star\right)^{j} +
+   \frac{p^i}{E_p}\varepsilon_{\lambda}^{0}\left(\varepsilon_\lambda^\star\right)^{j} +
+   \frac{p^j}{E_p}\varepsilon_\lambda^{i} \left(\varepsilon_\lambda^\star\right)^{0} +
+   \frac{p^{i}p^{j}}{E_p^2}
+   \varepsilon_\lambda^{0}\left(\varepsilon_\lambda^\star\right)^{0}\nonumber \\ 
+   &= \sum_\lambda\varepsilon_{\lambda}^{i}\left(\varepsilon_\lambda^\star\right)^{j} +
+   \frac{p^i}{E_p}\varepsilon_{\lambda}^{0}\left(\varepsilon_\lambda^\star\right)^{j} +
+   \frac{p^j}{E_p}\varepsilon_\lambda^{0} \left(\varepsilon_\lambda^\star\right)^{i} +
+   \frac{p^{i}p^{j}}{E_p^2}
+   \varepsilon_\lambda^{0}\left(\varepsilon_\lambda^\star\right)^{0}.
+   \end{align}
+   The first and last term are symmetric, and so is the sum of the second with the third.
+   Thus this commutator also vanishes.
+
+   The last commutator is
+   \begin{align}
+       [A^{i},\Pi_j] = \int \frac{\mathop{d^3p}}{(2\pi)^3}\int
+       \frac{\mathop{d^3p}}{(2\pi)^3}\frac{1}{\sqrt{2E_p} } i\sqrt{\frac{E_q}{2}}
+       \sum_{\lambda,\lambda^\prime}\left[a_{\lambda\textbf{p}}\varepsilon_\lambda^{i}e^{-ip\cdot
+       x}+\text{h.c.}, a_{\lambda^\prime
+       \textbf{q}}(\tilde{\varepsilon}_{\lambda})_j e^{-iq\cdot y}-\text{h.c.}\right].
+   \end{align}
+   Again the $[a,a], [a^\dagger ,a^\dagger ]$ terms die:
+   \begin{align}
+       [A^{i},\Pi_j] = i\int \frac{\mathop{d^3p}}{(2\pi)^3}\int
+       \frac{\mathop{d^3q}}{(2\pi)^3} \sqrt{\frac{E_q}{4E_p}}
+       \sum_{\lambda,\lambda^\prime}\Big\{-&\left[a_{\lambda\textbf{p}},
+       a_{\lambda^\prime\textbf{q}}^\dagger
+       \right]\varepsilon_{\lambda}^{i}(p)\left(\tilde{\varepsilon}^\star_{\lambda^\prime}\right)_{j}(q)e^{-ip\cdot
+       x} e^{iq\cdot y}
+       + \nonumber \\ 
+       +& \left[a_{\lambda\textbf{p}}^\dagger ,
+       a_{\lambda^\prime\textbf{q}}
+       \right]\left( \varepsilon_{\lambda} ^\star\right)
+       ^{i}(p)\left(\tilde{\varepsilon}_{\lambda^\prime}\right)_{j}(q) e^{ip\cdot
+       x}e^{-iq\cdot y}\Big\}.
+   \end{align}
+   I substitute the commutator relations:
+   \begin{align}
+       [A^{i},\Pi_j] = -i \int
+       \frac{\mathop{d^3p}}{(2\pi)^3}\sqrt{\frac{\cancel{E_p}}{4\cancel{E_p}}}
+       \sum_\lambda \left( \varepsilon_{\lambda}^{i} \left(\tilde{\varepsilon}_{\lambda}^\star\right)_j
+       e^{-ip\cdot (x-y)} +
+       \left(\varepsilon_{\lambda}^\star\right)^{i}\left(\tilde{\varepsilon}_\lambda\right)_j
+       e^{ip\cdot (x-y)} \right) .
+   \end{align}
+   This calculation I have to do: 
+   \begin{align}
+       \sum_\lambda \varepsilon^{i}_{\lambda}\left(\tilde{\varepsilon}^\star_\lambda\right)_j &= 
+       \sum_\lambda \varepsilon_\lambda^{i}\left[ \left(\varepsilon^\star_\lambda\right)_j  +
+       \frac{p_j}{E_p}\left( \varepsilon _\lambda
+^\star \right) _0 \right]     \nonumber \\ 
+&= - g^{i}_j - \frac{p^{i}p_j}{m^2} - \frac{p_i}{E_p} \left(\cancel{g^{i}_0 }-
+\frac{p^{j}p_0}{m^2}\right);
+\end{align}
+now, $p_0 = E_p$ (since we are on-shell) and the last two terms cancel. Moreover,
+$g^{i}_j= \delta^{i}_j$ by definition. So the sum reduces to $-\delta^{i}_j$. The other polarisation sum gives the same value (it
+is the complex conjugate of what I just found, which is a real number), cancelling the $1
+/\sqrt{4}  = 1 /2$. The remaining
+plane wave $\mathop{d^3p} $ integral yields a delta: 
+\begin{align}
+    [A^{i}, \Pi_j] = -i (-\delta^{i}_j) \delta^{(3)}(\textbf{x}-\textbf{y}).
+\end{align}
+\end{proof}
+\subsection{Feynman propagator}%
+At last I compute the Feynman propagator. In principle, that would require computing the
+time-ordered product of fields. However, as a consequence of the Dyson-Schwinger
+equation,\footnote{which in principle could be proven without the path integral
+formulation, albeit I failed in doing so.}
+in any theory the 2-point correlation function of fields can be expressed as the Green function of the EL
+equations. If a current is introduced in the Lagrangian ($\mathcal{L}_\text{int} = -J_\mu
+A^{\mu} $), the EL system becomes
+\begin{align}
+J_{\mu}&=    (\partial _\rho \partial ^{\rho} + m^2) A_{\mu} - \partial _{\mu}\partial _\nu
+    A^{\nu}  \nonumber \\ 
+    &= \left[\left(\square +m^2\right)g_{\mu\nu} - \partial _\mu \partial _\nu
+    \right]A^{\nu}.
+\end{align}
+the Green's function is defined so that $A^{\mu}\overset{!}{=}-i G^{\mu\nu}\star J_\nu$
+(where the $-i$ is put in place to be consistent with Dyson-Schwinger), or
+\begin{align}
+    i\delta_{\mu}^{\lambda}\delta^{(4)}(x-y)&\overset{!}{=}  \left[\left(\square +m^2\right)g_{\mu\nu} - \partial _\mu \partial _\nu
+    \right]G^{\nu\lambda}.
+\end{align}
+I move to momentum space:
+\begin{align}
+    i\delta_{\mu}^{\lambda} = \left[\left(-p^2 + m^2\right)g_{\mu\nu} + p_\mu p_\nu\right]G^{\nu\lambda}.
+\end{align}
+Now, to invert this relation, one could first contract with $p^{\mu}$:
+\begin{align}
+ip^{\lambda} &= \left[\left(-p^2+m^2\right)p_{\nu} + p^2 p_\nu\right]G^{\nu\lambda}\nonumber \\ 
+&= m^2 p_\nu G^{\nu\lambda},
+\end{align}
+thus I can substitute $ip^{\lambda} / m^2$ in place of $p_\nu G^{\nu\lambda}$:
+\begin{align}
+    i\delta_{\mu}^{\lambda} &= \left(-p^2 +m^2\right)g_{\mu\nu}G^{\nu\lambda} + i
+    \frac{p_\mu p^{\lambda}}{m^2},
+\end{align}
+rearranging
+\begin{align}
+   g_{\mu\nu}G^{\nu\lambda} = i \frac{\delta_{\mu}^{\lambda}- p_\mu p^{\lambda} / m^2
+   }{-p^2 + m^2}
+\end{align}
+and contracting with the metric
+\begin{align}
+    G^{\mu\lambda} = i \frac{g^{\mu\lambda} - p^{\mu}p^{\lambda} / m^2}{-p^2 + m^2}.
+\end{align}
+This momentum-space Green's function has two poles at $p^{0}= \pm E_p = \pm  \sqrt{\textbf{p}^2+m^2}
+$. Time-ordering is taken care of with the $i\varepsilon$ prescription: 
+\begin{align}
+    \boxed{
+        G^{\mu\lambda} =- i \frac{g^{\mu\lambda} - p^{\mu}p^{\lambda} / m^2}{p^2 - m^2+
+        i\varepsilon}.
+        }
+\end{align}
+Indeed the denominator can be expanded as
+\begin{align}
+     (p^{0})^2 - E_p^2+ i\varepsilon &= (p^{0})^2 - (E_p -
+i\varepsilon)^2 \nonumber \\ &= (p^{0}-E_p +i\varepsilon) (p^{0}+E_p - i\varepsilon)
+\end{align}
+which means that I have moved the $+E_p$ pole down and the $-E_p$ pole up. Integration in
+$\mathop{dp^{0}} e^{-ip^{0}(t-t^\prime)}$ is performed by closing the integration path in the upper
+(lower) plane for $t<t^\prime$ ($t>t^\prime$), as per Jordan's lemma. So for $t<t^\prime$
+($t>t^\prime$),
+I pick up the $-E_p$ ($+E_p$) pole. This is an equivalent
+prescription to the Feynman integration contour we have seen in class, and thus the boxed
+quantity is the (momentum space) Feynman propagator.
+
+\section{Exercise 4}%
+\begin{exercise}
+   Compute the unpolarized, differential cross-section in the center of mass frame
+for the annihilation of one electron and one positron into two photons at leading
+order in QED:
+\begin{align}
+    e^{+}e^{-}\to \gamma\gamma.
+\end{align}
+\end{exercise}
+\subsection{Initial and final particle states, Feynman amplitudes}%
+The in and out states are the direct product of single-particle states:
+\begin{align}
+    \ket{\Psi_\alpha} &= \ket{e^{-}(p_1,s) e^{+}(p_2,q)} = \sqrt{2E_{p_1}2E_{p_2}}
+    c^\dagger (p_1,s) d^\dagger (p_2,q) \ket{0} \nonumber \\ 
+    \ket{\Psi_\beta} &= \ket{\gamma (k_1,\lambda_1) \gamma(k_2,\lambda_2)} = \sqrt{2E_{k_1}2E_{k_2}}
+    a^\dagger (k_1,\lambda_1) a^\dagger (k_2,\lambda_2) \ket{0} .
+\end{align}
+Obviously the diagrams will have to be at least second-order, since vertices have 3 legs
+and we have 4 players. The (LO) amplitude is thus given by:
+\begin{align}
+i\mathcal{M}= 
+\underbrace{\begin{gathered}
+                \feynmandiagram [vertical=a to b] {
+                i1 [particle=\(u^s (p_1)\)] -- [fermion] a --
+                [photon] f1[particle = \(\varepsilon_{\lambda_1}(k_1)\)],
+                i2 [particle=\(\bar{v}^{q}(p_2)\)] -- [anti fermion] b -- [photon]
+                f2[particle=\(\varepsilon_{\lambda_2}(k_2)\)],
+                a -- [fermion, momentum = {\(q\)}] b,
+                };  
+                    \end{gathered}}_{i\mathcal{M}_t} +
+                \underbrace{    \begin{gathered}
+                            \feynmandiagram[horizontal=i1 to i2,remember picture]{
+                            f1[particle=\(u^{s}(p_1)\)]--[fermion,]b--[photon,
+                            opacity=0]f2[particle=\(\varepsilon_{\lambda_1(k_1)}\)],
+                            i1[particle=\(\bar{v}^{q}(p_2)\)]--[anti fermion,]a--[photon,opacity=0]i2[particle=\(\varepsilon_{\lambda_1(k_1)}\)],
+                            b--[fermion, momentum'=\(\tilde{q}\)]a,
+                            };
+                            \begin{tikzpicture}[overlay,remember picture]
+                            \begin{feynman}
+                            \path (b) -- (i2) coordinate[midway] (b1)
+                            (a) -- (f2) coordinate[midway] (a1);
+                            \diagram*{
+                            (b) --[photon] (b1) -- [photon] (i2),
+                            (a) --[photon,rubout] (a1) -- [photon,] (f2)
+                            };
+                            \end{feynman}
+                            \end{tikzpicture}
+                            \end{gathered}}_{i\mathcal{M}_u}
+.
+\end{align}
+I proceed with the evaluation of the diagrams. Going upstream as usual,
+\begin{align}
+i    \mathcal{M}_t &= \bar{v}^{q}(p_2) (-ie\gamma^{\mu})
+    \frac{i\left(\slashed{q}+m\right)}{q^2-m^2 +i\varepsilon} (-ie \gamma^{\nu} )u^{s}(p_1)
+    \varepsilon^\star_\mu (k_2,\lambda_2) \varepsilon^\star_\nu (k_1,\lambda_1),\nonumber \\ 
+i    \mathcal{M}_u &= \bar{v}^{q}(p_2) (-ie\gamma^{\mu})
+    \frac{i\left(\slashed{\tilde{q}}+m\right)}{\tilde{q}^2-m^2 +i\varepsilon} (-ie \gamma^{\nu} )u^{s}(p_1)
+    \varepsilon^\star_\mu (k_1,\lambda_1) \varepsilon^\star_\nu (k_2,\lambda_2).
+    \label{4.113}
+\end{align}
+From 4-momentum conservation: in $\mathcal{M}_t$, $q = p_1 - k_1 = k_2-p_2$; in $\mathcal{M}_u, $
+$\tilde{q}
+= p_1 - k_2 = k_1- p_2$. Thus the two diagrams become
+\begin{align}
+i    \mathcal{M}_t &= \frac{-ie ^2}{(p_1-k_1)^2 - m^2 + i\varepsilon}
+    \bar{v}^{q}(p_2)\slashed{\varepsilon}^\star (k_2,\lambda_2)\left(\slashed{p}_1 -
+    \slashed{k}_1 + m\right)\slashed{\varepsilon}^\star(k_1,p_1) u^{s}(p_1)\nonumber \\ 
+ i   \mathcal{M}_u &= \frac{-ie ^2}{(p_1-k_2)^2 - m^2 + i\varepsilon}
+    \bar{v}^{q}(p_2)\slashed{\varepsilon}^\star (k_1,\lambda_1)\left(\slashed{p}_1 -
+    \slashed{k}_2 + m\right)\slashed{\varepsilon}^\star(k_2,p_2) u^{s}(p_1), 
+\end{align}
+where $\slashed{\varepsilon}^\star = \gamma^{\mu} \varepsilon_\mu $.
+
+\subsection{Square matrix element calculation}%
+\begin{definition}[Mandelstam variables]
+    Whenever possible I will make the substitutions:
+    \begin{align}
+       s &= (p_1+p_2)^2 = (k_1+k_2)^2\nonumber \\  
+       t &= (p_1-k_1)^2 = (p_2-k_2)^2 \nonumber \\ 
+       u &= (p_1-k_2)^2 = (p_2-k_1)^2 
+    \end{align}
+\end{definition}
+\begin{rmk}
+    I list here some useful properties of the Mandelstam variables:
+    \begin{align}
+        s &= (p_1+p_2)^2 = 2m^2 + p_1\cdot p_2  = (k_1+k_2)^2 = k_1\cdot k_2\nonumber \\ 
+        t &= (p_1-k_1)^2 = m^2 -p_1\cdot k_1  = (p_2-k_2)^2 = m^2 - k_2\cdot k_2\nonumber \\ 
+        u &= (p_1-k_2)^2 = m^2- p_1\cdot k_2  = (p_2-k_1)^2 = m^2 - p_2\cdot k_1
+        \label{4.116b}
+    \end{align}
+    and also
+    \begin{align}
+        t + s + u &= 2m^2    \label{4.117}
+        \end{align}
+\end{rmk}
+\begin{proof}
+The only non-trivial one is:
+   \begin{align}
+t+s+u &=  (p_1+p_2)^2 + (p_1-k_1)^2 + (p_1-k_2)^2 \nonumber \\ 
+       &= 2m^2 + 2p_1\cdot p_2 + m^2 - 2p_1\cdot k_1 + m^2 - 2p_1\cdot k_2  
+   \end{align} 
+   and since ($p_1 + p_2 = k_1 + k_2,$) $k_1+k_2-p_2 = p_1$, the dotted products give
+   $-2p_1\cdot p_1 = -2m^2$.
+\end{proof}
+When we take the square amplitude we have 4 terms: 
+\begin{align}
+    \left|\mathcal{M}\right|^2 &= \left|\mathcal{M}_t\right|^2 +
+    \left|\mathcal{M}_u\right|^2 + (\mathcal{M}_t^\star \mathcal{M}_u + \mathcal{M}_t
+    \mathcal{M}_u^\star)\nonumber \\ 
+    &= \left|\mathcal{M}_t\right|^2 +
+    \left|\mathcal{M}_u\right|^2 +2 \mathfrak{Re}(\mathcal{M}_t
+    \mathcal{M}_u^\star)
+\end{align}
+If we ignore spin and helicity, we ought to sum on spin states and polarisation states. In
+particular, polarisation sums give a nice result.
+\begin{rmk}[Photon polarisation sums]
+There are two physical polarisations. I can define them as vectors orthogonal to
+$p^{\mu}$, and to another null vector $r^{\mu}$ (not proportional to $p^{\mu}$). If I
+choose $r^{\mu} \coloneqq \bar{p}^{\mu}= (E_p, -\textbf{p})$, then the following holds:
+\begin{align}
+    \sum _\lambda \left(\varepsilon_\lambda\right)_\mu (p)
+    \left(\varepsilon_\lambda^\star\right)_\nu(p) = -g_{\mu\nu} + \frac{p_\mu \bar{p}_\nu
+    + p_\nu \bar{p}_\mu}{2E_p}\label{4.116}.
+\end{align}
+\end{rmk}
+\begin{proof}
+Like the polarisation sum in the previous exercise, this is proven in one specific frame (e.g. $p^{\mu}= (E_p , 0 ,0,p_z)$) and then written
+in Lorentz-covariant form. I pick the usual normalisation $\varepsilon_\lambda \cdot
+\varepsilon_\lambda =  -1$. Then the two physical polarisations are
+\begin{align}
+    \varepsilon_1 &= (0,1,0,0)\nonumber \\ 
+    \varepsilon_2 &= (0,0,1,0).
+\end{align}
+Then 
+\begin{align}
+    \sum _\lambda \left(\varepsilon_\lambda\right)_\mu (p)
+    \left(\varepsilon_\lambda^\star\right)_\nu(p) &= \begin{bmatrix} 0 \\1\\0\\0
+    \end{bmatrix} \begin{bmatrix} 0&1&0&0 \end{bmatrix} +  \begin{bmatrix} 0 \\0\\1\\0
+    \end{bmatrix} \begin{bmatrix} 0&0&1&0 \end{bmatrix}  \nonumber \\ 
+    &= \begin{bmatrix} 0 & 0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&0 \end{bmatrix} .
+\end{align}
+In this frame, the RHS of \eqref{4.116} is 
+\begin{align}
+    \begin{bmatrix} -1 &0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1 \end{bmatrix}  +
+    \frac{1}{2E_p}\begin{bmatrix} E_p^2 +E_p^2 &&&-E_p p_z + E_p p_z\\&0&&\\&&0&\\E_p
+    p_z - E_p p_z&&&-p_z^2-p_z^2 \end{bmatrix} 
+\end{align}
+and since $E_p^2- p_z^2=0$, the 00 and 33 entries of the RHS go to zero, which proves the
+result in one frame. Since \eqref{4.116} is Lorentz-covariant, it must hold in all frames.
+\end{proof}
+\begin{lemma}
+Due to the Ward identity, we can substitute
+\begin{align}
+\sum _\lambda (\varepsilon_\lambda)_\mu (\varepsilon_\lambda^\star)_\nu \to -g_{\mu\nu}
+\end{align}
+when summing over physical polarisations for our matrix elements.
+\end{lemma}
+\begin{proof}
+We have terms of the type 
+\begin{align}
+\sum_{\text{pol}}\left|\mathcal{M}\right|^2 & = \sum_\lambda (\varepsilon_\lambda^\star)_\mu
+\left( \mathcal{M}^\star \right) ^{\mu} (\varepsilon^{\lambda})_\nu \mathcal{M}^{\nu}\nonumber \\ 
+&= \left(-g_{\mu\nu}+ \frac{p_\mu \bar{p}_\nu + p_\nu
+\bar{p}_\mu}{2E_p}\right)\left(\mathcal{M}^\star\right)^{\mu}\mathcal{M}^{\nu}
+\end{align}
+and the second piece in brackets is zero due to Ward's identity ($p_{\mu}\mathcal{M}^\mu =
+0$).\footnote{This is also the reason why I was free to pick $r^{\mu} = \bar{p}^{\mu}$
+without consequences. Any other choice for $r^{\mu}$ would be a linear combination of my
+choice and $p^{\mu}$, but the latter term would give zero at this level.}
+\end{proof}
+\subsubsection{Trace 1/3}%
+I go on computing the first term, $\left|\overline{\mathcal{M}}_t\right|^2 $. As a
+refresher for myself:
+\begin{rmk}
+    The h.c. of our spinor products is naturally
+    \begin{align}
+        \left(\bar{v}^{q} \gamma^{\mu} (\slashed{q})\gamma^{\nu} u^{s}\right)^\dagger =
+        \bar{u}^{s} \gamma^{\nu} (\slashed{q}) \gamma^{\mu} v^{q}.
+    \end{align}
+\end{rmk}
+\begin{proof}
+Relies on $(\gamma^{\mu})^\dagger  = \gamma^{0}\gamma^{\mu}\gamma^{0}$ (alias $\gamma^0$
+is hermitian and the others are antihermitian) and $\gamma^{0} \gamma^{0} = 1$:
+    \begin{align}
+        \left(\bar{v}^{q} \gamma^{\mu} (\slashed{q})\gamma^{\nu} u^{s}\right)^\dagger &=
+        \left( u^{s} \right) ^\dagger\left(  \gamma^{0}\gamma^{\nu}\cancel{\gamma^{0}} \right)
+        \left( \cancel{\gamma^{0}}\gamma^{\rho} \cancel{\gamma^{0}} \right)         q_\rho
+        \left( \cancel{\gamma^{0}}\gamma^{\mu} \gamma^{0} \right)  \left[ \left(v^{q} \right)
+        ^\dagger 
+        \gamma^{0}\right]^\dagger \nonumber \\ 
+        &= \bar{u}^{s} \gamma^{\nu} \gamma^{\rho} q_\rho\gamma^{\mu}\cancel{ \gamma^{0}}
+     \cancel{   \gamma^{0}}v^{q}.
+    \end{align}
+\end{proof}
+Similar things happen with the $m$ terms. Then
+\begin{align}
+    \left|\overline{\mathcal{M}}_t\right|^2 & \coloneqq \frac{1}{4}\sum_{\lambda,s,q}
+    \left|\mathcal{M}_t\right|^2 \nonumber \\ 
+    &= \frac{e^{4}}{4(t-m^2)^2}\sum_{\lambda,s,q} \bar{v}^{q}(p_2)
+    \varepsilon_\mu^\star(\lambda_2,p_2) \gamma^{\mu} (\slashed{p}_1 - \slashed{k}_1 +m)
+    \varepsilon_{\nu}^\star (\lambda_1,p_1) \gamma^{\nu} u^{s}(p_1)\times \nonumber \\ 
+    &\phantom{=\frac{e^{4}}{(t-m^2)^2}\sum}\times \bar{u}^{s}(p_1)
+    \gamma^{\nu^\prime}\varepsilon_{\nu^\prime}(\lambda_1,p_1) (\slashed{p}_1 -
+    \slashed{k}_1 +m) \gamma^{\mu^\prime} \varepsilon_{\mu^\prime} (\lambda_2, p_2)
+    v^{q}(p_2)
+\end{align}
+For clarity's sake I write the indices in spinor space:
+\begin{align}
+    \left|\overline{\mathcal{M}}_t\right|^2 
+    &= \frac{e^{4}}{4(t-m^2)^2}\sum_{\mathbin{\color{brown}\lambda,\lambda^\prime},\mathbin{\color{red}s},\mathbin{\color{blue}q}} \mathbin{\color{blue}\left[ \bar{v}^{q}(p_2)
+ \right] _{\alpha} }   \left[ \gamma^{\mu} \right] ^{\alpha\beta} \left[ (\slashed{p}_1 - \slashed{k}_1 +m)
+ \right]_{\beta\gamma}\left[  \gamma^{\nu} \right] ^{\gamma\delta}\mathbin{\color{red}\left[  u^{s}(p_1)
+ \right]_{\delta}} \times \nonumber \\ 
+    &\phantom{=\frac{e^{4}}{(t-m^2)^2}\sum}\times\mathbin{\color{red} \left[ \bar{u}^{s}(p_1)
+ \right]_\varepsilon} \left[ \gamma^{\nu^\prime} \right]^{\varepsilon\zeta} \left( (\slashed{p}_1 -
+    \slashed{k}_1 +m) \right)_{\zeta\eta} \left[ \gamma^{\mu^\prime}  \right]
+    ^{\eta\theta}\mathbin{\color{blue}\left[   v^{q}(p_2) \right] _\theta }\times  \nonumber \\
+&\phantom{=\frac{e^{4}}{(t-m^2)^2}\sum}\times \mathbin{\color{brown}\varepsilon_\mu^\star(\lambda_2,p_2)
+\varepsilon_{\mu^\prime} (\lambda_2, p_2)\varepsilon_{\nu^\prime}(\lambda_1,p_1)
+\varepsilon_{\nu}^\star (\lambda_1,p_1) }.
+\end{align}
+I can break down the coloured pieces: spinor sums satisfy the completeness relations,
+\begin{align}
+\mathbin{\color{blue}\sum _q \bar{v}^{q}(p_2)_\alpha v^{q}(p_2)_\theta = \left( \slashed{p}_2 - m \right) _{\alpha\theta}}
+\end{align}
+and
+\begin{align}
+\mathbin{\color{red}\sum _q u^{s}(p_1)_\delta \bar{u}^{s}(p_1)_\varepsilon = \left(
+\slashed{p}_1+ m \right) _{\delta\varepsilon}}.
+\end{align}
+The terms in brown simply become 
+\begin{align}
+    \mathbin{\color{brown}g_{\mu\mu^\prime} g_{\nu\nu^\prime}}.
+\end{align}
+I drop the indices now. Since they are all contracted, the matrix element is a trace of gamma matrices:
+\begin{align}
+    \left|\overline{\mathcal{M}}_t\right|^2 &=
+    \frac{e^{4}}{4(t-m^2)^2}\Tr\left\{(\slashed{p}_2-m) \gamma^{\mu}
+    (\slashed{p}-\slashed{k}_1 +m) \gamma^{\nu}(\slashed{p}_1+m)\gamma_\nu (\slashed{p}-\slashed{k}_1 +m)
+    \gamma_\mu\right\}.
+\end{align}
+This calls for some manipulation. First, trace is invariant under cyclic permutations. So
+I move the last $\gamma_\mu$ to the left. Then I use this:
+\begin{rmk} 
+    \begin{align}
+        \gamma_\mu (\slashed{p}_2 \pm  m) \gamma^{\mu} = -2\slashed{p}_2 \pm 4m.\label{gronz}
+    \end{align}
+\end{rmk}
+\begin{proof}
+    By direct computation.
+    \begin{align}
+        \gamma_\mu (\slashed{p} \pm  m) \gamma^{\mu} &= \gamma_\mu (\gamma^{\nu}p_\nu \pm  m)
+        \gamma^{\mu}\nonumber \\ 
+        &= \gamma_\mu \gamma^{\nu}p_\nu \gamma^{\mu} \pm  m\gamma_\mu\gamma^{\mu}.
+        \\ \intertext{
+    The Clifford algebra on the first term gives $\gamma_\mu \gamma^{\nu} \gamma^{\mu} =
+    -\gamma_\mu \gamma^{\mu}\gamma^{\nu} + 2\gamma_\mu g^{\mu\nu}$, whereas the second
+    term has a $\gamma_\mu \gamma^{\mu}=  4$:}
+        & = -4 \gamma^{\nu}p_\nu + 2\gamma^{\nu}p_\nu - 4 m  = -2\gamma^{\nu}p_\nu \pm 4m.
+    \end{align}
+I group a 4 outside:
+\end{proof}
+\begin{align}
+    \left|\overline{\mathcal{M}}_t\right|^2 &=
+    \frac{e^{4}}{(t-m^2)^2}\Tr\left\{\left(\slashed{p}_2+2m\right)
+    (\slashed{p}_1-\slashed{k}_1 +m) (\slashed{p}_1-2m) (\slashed{p}_1-\slashed{k}_1 +m)\right\}.
+\end{align}
+The next step is to break down this trace. Due to the Clifford algebra, an odd number of
+$\gamma$ matrices is traceless. Then
+\begin{align}
+   \Tr\left\{\ldots\right\} &= \Tr \left\{\slashed{p}_2
+    (\slashed{p}_1-\slashed{k}_1)
+    \slashed{p}_1 (\slashed{p}_1- \slashed{k}_1)\right\} + \Tr\left\{\slashed{p}_2
+    (\slashed{p}_1 - \slashed{k}_1) (-2m) m\right\} + \Tr\left\{\slashed{p}_2 m
+    \slashed{p}_1 m  \right\}  +\nonumber \\ 
+    &+\Tr\left\{\slashed{p}_2 m (-2m) (\slashed{p}_1 - \slashed{k}_1)\right\}+ \Tr
+   \left\{(2m) (\slashed{p}_1-\slashed{k}_1) \slashed{p}_1 m\right\} +\Tr\left\{ (2m)
+   (\slashed{p}_1 - \slashed{k}_1) (-2m) (\slashed{p}_1-\slashed{k}_1)\right\} +\nonumber \\ 
+   &+ \Tr\left\{(2m)m \slashed{p}_1 (\slashed{p}_1-\slashed{k}_1)\right\} +
+   \Tr\left\{(2m)m(-2m)m\right\}\nonumber \\ 
+   &= \Tr\left\{\slashed{p}_2 (\slashed{p}_1-\slashed{k}_1) \slashed{p}_1
+   (\slashed{p}_1 - \slashed{k}_1)\right\} - 2m^2 \Tr\left\{\slashed{p}_2 (\slashed{p}_1 -
+   \slashed{k}_1)\right\} + m^2 \Tr\left\{\slashed{p}_2\slashed{p}_1\right\} - 2m^2
+   \Tr\left\{\slashed{p}_2(\slashed{p}_1 - \slashed{k}_1)\right\} +\nonumber \\ 
+   &+ 2m^2 \Tr\left\{(\slashed{p}_1-\slashed{k}_1)\slashed{p}_1\right\} - 4m^2
+   \Tr\left\{(\slashed{p}_1-\slashed{k}_1) (\slashed{p}_1-\slashed{k}_1)\right\} + 2m^2
+   \Tr\left\{\slashed{p}_1 (\slashed{p}_1-\slashed{k}_1)\right\} - 4m^{4}\Tr \mathbb{I} \nonumber \\ 
+   &= \Tr\left\{\slashed{p}_2 (\slashed{p}_1-\slashed{k}_1) \slashed{p}_1
+   (\slashed{p}_1-\slashed{k}_1)\right\} - 4m^2 \Tr \left\{\slashed{p}_2 (\slashed{p}_1 -
+   \slashed{k}_1)\right\} + m^2 \Tr \left\{\slashed{p}_2 \slashed{p}_1\right\}+\nonumber \\ &+ 4m^2
+   \Tr\left\{(\slashed{p}_1- \slashed{k}_1)\slashed{p}_1\right\} - 4m^2 (p_1-k_1)^2 \Tr
+   \mathbb{I} - 4m^{4}\Tr \mathbb{I}
+\end{align}
+The first term can be further simplifed, using $\slashed{p}_1 \slashed{p}_1 = p_1\cdot
+p_1 = m^2$ and $\slashed{k}_1 \slashed{k}_1 = k_1\cdot k_1=  0$:
+\begin{align}
+   \slashed{p}_2 (\slashed{p}_1-\slashed{k}_1)\slashed{p}_1(\slashed{p}_1-\slashed{k}_1)
+   &= \slashed{p}_2  (\slashed{p}_1-\slashed{k}_1)(m^2 - \slashed{p}_1 \slashed{k}_1) \nonumber \\ 
+   &= \slashed{p}_2 (m^2 \slashed{p}_1 - m^2 \slashed{k}_1
+   - m^2 \slashed{k}_1 + \slashed{k}_1 \slashed{p}_1 \slashed{k}_1)\nonumber \\ 
+   &= m^2 \slashed{p}_2 \slashed{p}_1 -2 m^2 \slashed{p}_2 \slashed{k}_1 + \slashed{p}_2
+   \slashed{k}_1 \slashed{p}_1 \slashed{k}_1.
+\end{align}
+There is no sugar-coating this. I exploit the Dirac trace
+\begin{align}
+    \Tr\left\{\slashed{a} \slashed{b}\right\} = 4 a\cdot b.
+\end{align}
+These types of traces can be found starting from the trace of gamma matrices, in this case
+\begin{align}
+    \Tr \left\{\gamma_\mu \gamma_\nu\right\} = 4g_{\mu\nu}, 
+\end{align}
+and making the formal substitution for the Clifford algebra:
+\begin{align}
+    \left\{\gamma_\mu, \gamma_\nu\right\} = 2 g_{\mu\nu}\quad \implies
+    \left\{\slashed{a},\slashed{b}\right\}= 2a\cdot b.
+\end{align}
+Thanks to the Clifford algebra, the term with 4 slashed vectors cam be simplified as
+\begin{align}
+    \slashed{p}_2 \slashed{k}_1 \slashed{p}_1 \slashed{k}_1 = - \underbrace{\slashed{p}_2 \slashed{p}_1
+    \slashed{k}_1 \slashed{k}_1 }_{0}+ 2\slashed{p}_2 \slashed{k}_1 (p_1\cdot k_1)
+\end{align}
+Thus all is left is traces of two slashed vectors:
+\begin{align}
+    \Tr\left\{\ldots\right\}&= 4(2(p_1\cdot k_1) (p_2\cdot k_1) + m^2 (p_2\cdot p_1 -
+    2p_2\cdot k_1) +m^2 (-4 p_2(p_1-k_{1})
+   +\nonumber \\ &+
+    p_2\cdot p_1 + 4 (p_1-k_1)p_1 - 4(p_1-k_1)^2 )-4m^4)\nonumber \\ 
+    &= 4 ( 2(p_1\cdot k_1)(p_2\cdot k_1) + m^2( 2 p_2\cdot p_1 -2 p_2\cdot k_1
+    -4p_2\cdot p_1 +4p_2\cdot k_1 +\nonumber \\ 
+    &+4m^2 - 4k_1\cdot p_1 -4 m^2 + 8 p_1\cdot k_1) - 4m^{4})\nonumber \\ 
+    &= 8 ((p_1\cdot k_1)(p_2\cdot k_1) + m^2(-p_2\cdot p_1  + p_2\cdot k_1 + 2p_1\cdot
+    k_1)- 2m^{4}).
+    \end{align}
+This can be conveniently expressed in terms of Mandelstam by substituting \eqref{4.116b}:
+\begin{align}
+    \Tr\left\{\ldots\right\}&= 8 \left(\frac{m^2-t}{2}\frac{m^2-u}{2} + m^2 2
+    \frac{m^2-t}{2} + m^2 \frac{m^2-u}{2} - m^2 \frac{s}{2} + m^{4}- 2m^{4}\right).
+\end{align}
+I can get rid of $s = 2m^2 - u - t$ (from \eqref{4.117}): 
+\begin{align}
+    \Tr\left\{\ldots\right\}&= 8 \left(\frac{1}{4}(m^2-t)(m^2-u) + m^2(m^2-t) +
+    \frac{1}{2}m^2 (m^2-u) - \frac{m^2}{2}(2m^2-t-u)- m^{4}\right)\nonumber \\ 
+    &=2\left(m^2-t\right)\left(m^2-u\right) + 8 m^2(m^2-t) + 4 m^2(m^2-u) - 16m^{4} +
+    4m^2t + 4m^2u\nonumber \\ 
+    &= 2m^{4} - 2 m^2t - 2m^2u + 2ut + 8m^{4} - 8m^2t + 4m^{4} - 4m^2u -16m^{4} + 4m^2t +
+    4m^2u\nonumber \\ 
+    &=-6m^2t - 2m^2u +2ut -2m^{4}  
+\end{align}
+which can be factored into
+\begin{align}
+    \Tr\left\{1\right\} = 2(t-m^2)(u-3m^2) - 8m^{4}.
+\end{align}
+
+\subsubsection{Trace 2/3}%
+The second trace would be that coming from $\left|\mathcal{M}_u\right|^2 $. Fortunately,
+this one we can just read off the previous result: the amplitudes \eqref{4.113} are
+related by the substitution $(k_1,\lambda_1) \leftrightarrow (k_2,\lambda_2)$, and
+(subsequently) $q \leftrightarrow \tilde{q}$. The polarisation indices are dummies since I
+am summing over them. However the momenta are
+interchanged: instead of $q = p_1-k_1$, I have $\tilde{q} = p_1-k_2$. The square matrix
+element will be the same as the previous one, except now $u\leftrightarrow t$.
+\begin{align}
+    \Tr\left\{2\right\} = 2(u-m^2)(t-3m^2) - 8m^{4}.
+\end{align}
+\subsubsection{Trace 3/3}%
+The interference term is
+\begin{align}
+2\mathfrak{Re} \overline{\mathcal{M}}_t \overline{\mathcal{M}}_u^\star& \coloneqq
+\frac{1}{4}\sum_{\lambda,s,q}  \overline{\mathcal{M}}_t \overline{\mathcal{M}}_u^\star
++\text{c.c.}\nonumber \\ 
+    &= \frac{2e^{4}}{4(t-m^2)(u-m^2)}\sum_{\lambda,s,q} \bar{v}^{q}(p_2)
+    \mathbin{\color{brown}\varepsilon_\mu^\star(\lambda_2,p_2)} \gamma^{\mu} (q+m)
+    \mathbin{\color{brown}\varepsilon_{\nu}^\star (\lambda_1,p_1)} \gamma^{\nu} u^{s}(p_1)\times \nonumber \\ 
+    &\phantom{=\frac{e^{4}}{(t-m^2)^2}\sum}\times \bar{u}^{s}(p_1)
+    \gamma^{\nu^\prime}\mathbin{\color{brown}\varepsilon_{\nu^\prime}(\lambda_2,p_2)
+    (}\tilde{\slashed{q}}+m) \gamma^{\mu^\prime} \mathbin{\color{brown}\varepsilon_{\mu^\prime} (\lambda_1, p_1)
+}    v^{q}(p_2).
+\end{align}
+The difference here is that the polarisation sums in brown are mismatched, as now we get a
+ \begin{align}
+     g_{\mu\nu^\prime } g_{\mu^\prime\nu}
+ \end{align}
+ which means that it is no longer adjacent gamma matrices that are contracted together.
+ With this in mind, I the trace to compute is
+ \begin{align}
+ \Tr\left\{3\right\}&=
+    \frac{1}{4}\Tr\left\{(\slashed{p}_2-m) \gamma^{\nu}
+    (\slashed{q}+m) \gamma^{\mu}(\slashed{p}_1+m)\gamma_\nu
+    (\tilde{\slashed{q}}+m)
+    \gamma_\mu\right\}\nonumber \\ 
+    &= \frac{1}{4}\Tr\{\underbrace{\gamma^{\nu}(\slashed{q}+m) \gamma^{\mu}(\slashed{p}_1 +m ) \gamma_\nu
+}_{A}    (\tilde{\slashed{q}}+m \gamma_\mu )(\slashed{p}_2-m)\}.
+ \end{align}
+ The terms I called A become
+ \begin{align}
+     A &= m^2 \gamma^{\nu}\gamma^{\mu} \gamma_\nu + m\gamma^{\nu}(\slashed{q}\gamma^{\mu}+
+     \gamma^{\mu}\slashed{p}_1)\gamma_\nu  +
+     \gamma^{\nu}\slashed{q}\gamma^{\mu}\slashed{p}_1\gamma_\nu .
+ \end{align}
+Here is some Dirac algebra:
+ \begin{align}
+\gamma^{\mu}   \gamma_\mu &= 4,& \gamma^{\mu}\slashed{a}\gamma_\mu &=
+-2\slashed{a}, &\gamma^{\mu}\slashed{a}\slashed{b} \gamma_\mu &= 4a\cdot b, &
+\gamma^{\mu}\slashed{a}\slashed{b}\slashed{c}\gamma_\mu &=
+-2\slashed{c}\slashed{b}\slashed{a} \nonumber \\ 
+&&\gamma^{\mu} \gamma^\nu \gamma_\mu  &=
+ -2\gamma^{\nu}, & \gamma^{\mu}\gamma^{\alpha}\gamma^{\beta}\gamma_\mu &= 
+ 4g^{\alpha\beta},&\gamma^{\mu}\gamma^{\alpha}\gamma^{\beta}\gamma^{\rho}\gamma_\mu &=
+ -2 \gamma^{\rho}\gamma^{\beta}\gamma^{\alpha}. \label{dalgebra}
+ \end{align}
+(The relations in the second line are standard; those in the first line are consequence of
+the aforementioned substitution $g_{\mu\nu}\leftrightarrow \cdot $.)
+I also employ a mixed result which is not as easy to see with this analogy, hence I prove it:
+\begin{rmk}
+   \begin{align}
+       \gamma^{\nu}\slashed{a} \gamma^{\mu}\gamma_\nu = 4a^{\mu}.
+   \end{align} 
+\end{rmk}
+\begin{proof}
+   \begin{align}
+       \gamma^{\nu} \slashed{a} \gamma^{\mu} \gamma_\nu &= a_\rho\gamma^{\nu}
+       \gamma^{\rho}\gamma^{\mu} \gamma_\nu \nonumber \\ 
+       &= a_\rho 4g^{\rho\mu} = 4a ^{\mu},
+   \end{align} 
+   where in the first line I am free to move $a_\rho$ as it is just a scalar to spinorial
+   indices.
+\end{proof}
+
+Thus 
+ \begin{align}
+     A &= m^2 (-2\gamma^{\mu}) + 4m (q+p_1)^{\mu} -2 \slashed{p}_1\gamma^{\mu}\slashed{q}
+ \end{align}
+ and the trace is 
+ \begin{align}
+     \Tr\{3\} &= \frac{1}{4}\Tr\{[\underbrace{m^2 (-2\gamma^{\mu})}_{1}
+     +\underbrace{ 4m (q+p_1)^{\mu}}_{0} -\underbrace{2 \slashed{p}_1\gamma^{\mu}\slashed{q}
+}_{3}]\times (\tilde{\slashed{q}}+m)\underbrace{ \gamma_\mu
+}_{1}(\slashed{p}_2-m)\}.
+ \end{align}
+ The underbraces signify how many gamma matrices each term has. We want an even number of
+ them and thus
+ \begin{align}
+     \Tr\left\{3\right\} &= \frac{1}{4}\Tr \left\{ \left[ -2m^2 \gamma^{\mu}-
+     2\slashed{p}_1\gamma^{\mu}\slashed{q} \right] ( -m^2\gamma_\mu +
+     \tilde{\slashed{q}}\gamma_\mu\slashed{p}_2)\right\} + \nonumber \\ 
+     & +\frac{1}{4} \Tr\left\{4m^2 (q+p_1)^{\mu} \left(-\tilde{\slashed{q}}\gamma_\mu + \gamma_\mu
+     \slashed{p}_2\right)\right\}.
+ \end{align}
+ The first term gives (I use \eqref{dalgebra} in the second line)
+ \begin{align}
+     \Tr\left\{3.1\right\} &= 2 \left\{m^4 \Tr\left[\gamma^{\mu}\gamma_\mu\right] -
+     m^2\Tr\left[\gamma^{\mu}\tilde{\slashed{q}}\gamma_\mu \slashed{p}_2\right] + m^2
+     \Tr\left[\slashed{p}_1 \gamma^{\mu}\slashed{q}\gamma_\mu \right] -
+     \Tr\left[\slashed{p}_1 \gamma^{\mu}\slashed{q}
+     \tilde{\slashed{q}}\gamma_\mu \slashed{p}_2\right]\right\}\nonumber \\ 
+     &= 2 \left\{16m^{4}  - m^2 \Tr\left[-2\tilde{\slashed{q}}\slashed{p}_2\right] + m^2
+     \Tr\left[\slashed{p}_1 (-2\slashed{q})\right]- \Tr\left[\slashed{p}_1 4\left( q\cdot
+     \tilde{q} \right)  \slashed{p}_2\right]\right\}\nonumber \\ 
+     &= 16 \left\{2m^{4} + m^2 \tilde{q}\cdot p_2 -m^2 p_1\cdot q - 2(q\cdot \tilde{q})(p_1\cdot
+     p_2)  \right\} ;
+ \end{align}
+ the second term gives 
+ \begin{align}
+     \Tr\left\{3.2\right\} &= 4m^2 (q+p_1)^{\mu}\Tr\left[\tilde{\slashed{q}}\gamma_\mu -
+     \gamma_\mu \slashed{p}_2\right]\nonumber \\ 
+     &= 4m^2 (q+p_1)^{\mu}\Tr\left(\gamma_\mu ( \slashed{p}_2)-\tilde{\slashed{q}}\right) \nonumber \\ 
+     &= 16m^2 (q+p_1)^{\mu} (p_2- \tilde{q})_\mu.
+ \end{align}
+ Summing the contributions gives
+ \begin{align}
+     \Tr\left\{3\right\}&= 4 \left( 2 m^{4 }  + m^2 \tilde{q}\cdot p_2 - m^2 q\cdot p_1 -
+     2 \left(q\cdot \tilde{q}\right)\left(p_1\cdot p_2\right) + (q+p_1)\cdot
+     (p_2-\tilde{q})\right)\nonumber \\ 
+     &= -8 (q\cdot \tilde{q})(p_1\cdot p_2) + 4m^2(\tilde{q}p_2 - qp_1 + qp_2 - q\tilde{q} 
+     +p_1p_2 - p_1\tilde{q}) +8m^{4}\nonumber \\ 
+     &= -8 (q\tilde{q})(p_1p_2) + 4m^2 [ (q+\tilde{q})(p_2-p_1) - q\tilde{q} + p_1p_2 ] +
+     8m^{4}.
+     \end{align}
+     The first term in square brackets simplifies to (using $\tilde{q} = p_1-k_2 =
+     k_1-p_2$)
+     \begin{align}
+         (q+\tilde{q}) (p_2-p_1)  = (p_1-\cancel{k_1 }+\cancel{ k_1}- p_2)(p_2-p_1) = -2
+         m^2 + 2p_1\cdot p_2;
+     \end{align}
+     the term with $q\tilde{q}$ become (using $k_1+k_2 = p_1+p_2$)
+     \begin{align}
+         q\tilde{q} = (p_1-k_1) (p_1-k_2) &= p_1^2 - p_1(k_1+k_2) + k_1k_2\nonumber \\ 
+         &=p_1^2 - p_1(p_1+p_2) +k_1k_2 \nonumber \\ 
+         &= k_1k_2- p_1p_2 = \frac{1}{2}(k_1+k_2)^2 - \frac{1}{2} (p_1+p_2)^2 + m^2 = m^2.
+     \end{align}
+     Thus
+     \begin{align}
+         \Tr\left\{3\right\}&= -8m^2 p_1p_2 +4m^2 (-2m^2 +2p_1p_2 - m^2 + p_1p_2)
+         +8m^{4}\nonumber \\ 
+         &= 4m^2 p_1p_2 -4m^2 .
+     \end{align}
+     Now I can introduce the Mandelstam variables: $p_1 p_2 = (s-2m^2) /2 $ from
+     \eqref{4.116b}:
+     \begin{align}
+        \Tr\left\{3\right\}&= 2m^2 s - 4m^2 - 4m^2 = 2m^2 s - 8m^2.
+     \end{align}
+     Since the other traces are in terms of $u,t$, I also employ \eqref{4.117} ($t+u+s =
+     2m^2$),
+     \begin{align}
+         \Tr\left\{3\right\}&= -2m^2 t - 2m^2 u - 4m^{4}\nonumber \\ 
+         &= 2 m^2 ( m^2- t) + 2m^2 (m^2-u) -8m^{4}.
+     \end{align}
+     By the way this one piece is real, so the interference term will just be twice this.
+\subsubsection{Square matrix element}%
+All is left is to recover the previous results: 
+\begin{align}
+    \Tr\left\{1\right\} &= 2(t-m^2)(u-3m^2) - 8m^{4}\nonumber \\ 
+    \Tr\left\{2\right\} &= 2(u-m^2)(t-3m^2) - 8m^{4}\nonumber \\ 
+    \Tr\left\{3\right\} &=  -2m^2 (t-m^2) - 2m^2(u-m^2) - 8m^{4}.
+\end{align}
+The square matrix element has some further factors:
+\begin{align}
+    \left|\overline{\mathcal{M}}\right|^2 &= \frac{e^{4}}{(t-m^2)^2}\Tr\left\{1\right\} +
+    \frac{e^{4}}{(u-m^2)^2} \Tr{2} + \frac{2e^{4}}{(t-m^2)(u-m^2)}\Tr{3}\nonumber \\ 
+    &= 2e^{4} \Bigg\{ \frac{u-3m^2}{t-m^2} - \frac{4m^{4} }{(t-m^2)^2} +
+    \frac{t-3m^2}{u-m^2} - \frac{4m^{4}}{(u-m^2)^2} + \nonumber \\ 
+    &\phantom{=2e^{4}\Bigg\{}- \frac{2m^2}{u-m^2} - \frac{2m^2}{t-m^2}
+ -  \frac{8m^{4}}{(u-m^2)(t-m^2)} \Bigg\}\nonumber \\ 
+&= 2e^{4}\Bigg\{ \frac{u-m^2}{t-m^2} - \frac{4m^2}{t-m^2} + \frac{t-m^2}{u-m^2} -
+\frac{4m^2}{u-m^2} + \nonumber \\ &\phantom{=2e^{4}\Bigg\{}- 4m^4
+\left(\frac{1}{(t-m^2)^2}+\frac{1}{(u-m^2)^2}+\frac{2}{(u-m^2)(t-m^2)}\right) \Bigg\}.
+\end{align}
+The terms in brackets are the square of a binomial:
+\begin{align}
+    \left|\overline{\mathcal{M}}\right|^2 &= 2e^{4}\left\{\frac{u-m^2}{t-m^2} +
+    \frac{t-m^2}{u-m^2}- \frac{4m^2}{t-m^2}- \frac{4m^2}{u-m^2} -
+    4m^4\left(\frac{1}{t-m^2}+ \frac{1}{u-m^2}\right)^2\right\}\nonumber \\ 
+&= 2e^{4}\left\{\frac{u-m^2}{t-m^2} +
+    \frac{t-m^2}{u-m^2}- 4m^2\left( \frac{1}{t-m^2}- \frac{1}{u-m^2}  \right) -
+    4m^4\left(\frac{1}{t-m^2}+ \frac{1}{u-m^2}\right)^2\right\}.
+\end{align}
+Inserting a $+1-1$, and using the $-1$ to complete a square with the last two terms yields
+my final result:
+ \begin{align}
+\boxed{
+    \left|\overline{\mathcal{M}}\right|^2 = 2e^{4}\left\{\frac{u-m^2}{t-m^2} +
+    \frac{t-m^2}{u-m^2} + 1 - \left[1 +
+    2m^2\left(\frac{1}{t-m^2}+\frac{1}{u-m^2}\right)\right]^2\right\}.
+    }
+\end{align}
+\subsection{Differential cross section in CM frame}%
+\subsubsection{Kinematics}%
+For the cross section calculation, I start with some kinematics. In the CM frame,
+\begin{align}
+   p^{\mu} _{1,2} &= (E, \pm  \textbf{p}), & E &= (\textbf{p}^2 +m^2)^{1 /2},\nonumber \\ 
+    k_{1,2}^{\mu} &= (\omega, \pm \textbf{k}) ,& \omega &= \textbf{k}^2 = E.
+\end{align}
+The Mandelstam variable simplify to (defining $\cos\theta = \textbf{p}\cdot \textbf{k}$):
+\begin{align}
+    s &= (p_1+p_1)^2 = (2E^2) = 4E^2 \nonumber \\ 
+    t&= (p_1-k_1)^2 = - (\textbf{p} - \textbf{k})^2 = -\textbf{p}^2 - E^2 +
+    2 \left|\textbf{p}\right| E \cos\theta\nonumber \\ 
+    u &= (p_1-k_2)^2 = - (\textbf{p}+\textbf{k})^2 = -\textbf{p}^2 - E^2 - 2
+    \left|\textbf{p}\right|E\cos\theta .
+\end{align}
+\subsubsection{Cross section calculation}%
+I unwind $\left|\overline{\mathcal{M}}\right|^2 $ piece by piece:
+\begin{align}
+    t-m^2 &= \underbrace{- \textbf{p}^2 - m^2}_{-E^2} - E^2 + 2 \left|p\right|E\cos\theta \nonumber \\ 
+    &= -2E (E- \left|\textbf{p}\right|\cos\theta);
+\end{align}
+likewise
+\begin{align}
+    u-m^2 = -2E (E + \left|\textbf{p}\right|\cos\theta).
+\end{align}
+Thus the first three terms inside curly braces become
+\begin{align}
+    \frac{u-m^2}{t-m^2} + \frac{t-m^2}{u-m^2} + 1 &=
+    \frac{E+\left|\textbf{p}\right|\cos\theta}{E-\left|\textbf{p}\right|\cos\theta} +
+    \frac{E-\left|\textbf{p}\right|\cos\theta}{E + \left|\textbf{p}\right|\cos\theta}+1 \nonumber \\ 
+    &= \frac{(E+\left|\textbf{p}\right|\cos\theta)^2 +
+    (E-\left|\textbf{p}\right|\cos\theta)^2 + (E+\left|\textbf{p}\right|\cos\theta
+    )(E-\left|\textbf{p}\right|\cos\theta)}{E^2 - \textbf{p}^2 \cos^2\theta}\nonumber \\ 
+    &= \frac{2E^2 + 2\textbf{p}^2\cos^2\theta + E^2 - \textbf{p}^2 \cos\theta}{E^2-
+    \textbf{p}^2 \cos^2\theta} \nonumber \\ 
+    &= \frac{3E^2 + \textbf{p}^2 \cos^2\theta}{E^2- \textbf{p}^2\cos^2\theta}\\
+    \intertext{
+and I substitute $E^2 = \textbf{p}^2 + m^2$:}
+    & = \frac{3m^2 + \textbf{p}^2 (3 + \cos^2\theta)}{m^2 + \textbf{p}^2(1-\cos^2\theta)}
+    \nonumber \\ 
+    & = \frac{3m^2 + \textbf{p}^2 (3 + \cos^2\theta)}{m^2 + \textbf{p}^2\sin^2\theta}.
+\end{align}
+Next up the last two terms are
+\begin{align}
+    2m^2\left(  
+    \frac{1}{t-m^2} + \frac{1}{u-m^2}\right)  &= 2m^2 \left(\frac{1}{-2E(E -
+    \left|p\right|\cos\theta)} + \frac{1}{-2E(E+\left|p\right|\cos\theta)}\right).\\ \intertext{
+The denominator is the same as above; upon the same $E$ subsitution, it becomes}
+    & = -\frac{m^2}{E}\left(\frac{E + \cancel{\left|p\right|\cos\theta }+ E -
+    \cancel{\left|p\right|\cos\theta}}{m^2 + \textbf{p}^2 \sin^2\theta}\right)\nonumber \\ 
+    &= - \frac{2m^2}{m^2 + \textbf{p}^2 \sin^2\theta}\nonumber \\ 
+    1 + 2m^2\left(  
+    \frac{1}{t-m^2} + \frac{1}{u-m^2}\right)  &= 1-\frac{2m^2}{m^2 + \textbf{p} ^2\sin^2\theta}\nonumber \\ 
+    &= \frac{\textbf{p}^2 \sin^2\theta-m^2}{\textbf{p}^2 \sin^2\theta+m^2}
+\end{align}
+which we then square and join in with the other piece:
+\begin{align}
+   \left|\overline{\mathcal{M}}\right|^2   &= 2e^{4}\left\{\frac{3m^2 +
+   \textbf{p}^2(3+\cos^2\theta)}{m^2 + \textbf{p}^2\sin^2\theta} -
+   \left(\frac{\textbf{p}^2\sin^2\theta-m^2}{\textbf{p}^2\sin^2\theta+m^2}\right)^2\right\}.
+\end{align}
+From the textbooks, we find an expression for the CM differential cross-section:
+\begin{align}
+    \left(\frac{d\sigma}{d\Omega}\right)_\text{cm}=
+    \frac{\left|\textbf{k}\right|}{\left|\textbf{p}\right|}\frac{\left|\overline{\mathcal{M}}\right|^2 }{64 
+    \pi^2 s}& = \frac{2e^{4}}{64\pi^2 s}
+    \frac{E}{\left|\textbf{p}\right|}\frac{1}{4E^{2}}\left\{\ldots\right\} .
+    \end{align}
+I introduce an $\alpha = e^2 / \left( 4\pi \right) $:
+\begin{align}
+\boxed{
+    \left(\frac{d\sigma}{d\Omega}\right)_\text{cm} =
+        \frac{\alpha^2}{8}\frac{1}{E \left|\textbf{p}\right|}\left\{\frac{3m^2 +
+        \textbf{p}^2(3+\cos^2\theta)}{m^2+\textbf{p}^2\sin^2\theta} -
+        \left(\frac{\textbf{p}^2\sin^2\theta-m^2}{\textbf{p}^2\sin^2\theta+m^2}\right)^2\right\},
+    }
+\end{align}
+\subsection{NR limit}%
+In the NR limit ($p^2 \ll m^2 \approx E^2$), the terms inside curly braces simplify to
+\begin{align}
+    \left\{\ldots\right\}\overset{\text{nr}}{\longrightarrow} \frac{3m^2}{m^2} - \left( \frac{m^2}{m^2} \right) ^2 = 2
+\end{align}
+and the differential cross section becomes
+\begin{align}
+    \left(\frac{d\sigma}{d\Omega}\right)_\text{cm,NR} = \frac{\alpha^2}{4} \frac{1}{m
+    \left|\textbf{p}\right|}.
+\end{align}
+I integrate over the solid angle, which is 
+\begin{align}
+   \Omega = \frac{4\pi}{2}  = 2\pi
+\end{align}
+since the two final particles are indistinguishable (this prevents the state $(k_1,k_2)$
+and $(k_2,k_1)$ to be counted twice).
+\begin{align}
+\left(    \sigma\right)_\text{cm,nr} = \frac{\alpha^2\pi}{2m
+    \left|\textbf{p}\right|}. 
+\end{align}
+If I were to introduce a Bohr radius $1 / R_b = \alpha m$, I would write this cross section as
+\begin{align}
+    \boxed{
+        \left(\sigma\right)_\text{cm,nr} = \frac{\alpha^4\pi}{2}
+        \frac{m}{\left|\textbf{p}\right|} R_b^2.
+        }
+\end{align}
+\subsection{Comparison with experiments}%
+The data from LEP involves high energy processes ($E_\text{cm} \sim \SI{100}{\giga\ev}$).
+For what follows I used Python, which does not like very large numbers. Because $m \approx
+\SI{0.5}{\mega\ev} $ and, on top of that, all the energies in the differential cross section are squared,
+it is a valid approximation to consider massless electrons:
+\begin{align}
+ m^2\ll   \textbf{p}^2 \approx E^2 .
+\end{align}
+There is a small caveat in that we actually have factors of $\textbf{p}^2 \cos^2\theta$
+and $\textbf{p}^2 \sin^2\theta$ which could become arbitrarily small for the right values
+of theta, rendering the UR approximation invalid. However the values for $\theta$
+considered in the paper are far enough from those critical points ($0,\pi,\ldots$).
+
+In the UR limit, 
+\begin{align}
+    \left(\frac{d\sigma}{d\Omega}\right)_\text{cm,ur} &= \frac{\alpha}{8 E^2}
+    \left\{\frac{E^2(3+\cos^2\theta)}{E^2\sin^2\theta}-
+    \left(\frac{E^2\sin^2\theta}{E^2\sin^2\theta}\right)^2\right\}\nonumber \\ 
+    &= \frac{\alpha}{8E^2}\frac{3 + \cos^2\theta - 1}{\sin^2\theta}\nonumber \\ 
+    &= \frac{\alpha}{8E^2}\left(\frac{1+\cos^2\theta}{1-\cos^2\theta}\right).
+\end{align}
+To compare with data, I also needed to convert from 1/GeV$^2$ to pb:
+\begin{align}
+   \SI{1}{\pico\barn}  &= 10^{-12}\left( \SI{100}{\femto\metre\squared}  \right)  =
+   \frac{\SI{e-10}{\femto\metre}}{\left( \hbar c \right) ^2} =
+   \frac{\SI{e-10}{\femto\metre^2}
+   }{\left( \SI{0.197}{\giga\ev\femto\metre} \right) ^2 } 
+\end{align}
+which can be promptly inverted for 1/GeV$^2$:
+\begin{align}
+    \frac{1}{\text{GeV}^2} = \SI{0.389e10}{\pico\barn} .
+\end{align}
+For the total cross section, I integrated with scipy the relativistic expression for the
+differential cross section over the given angle range. In principle there is a divergence at $\theta= 0$, but we only
+need to calculate the cross section between $\theta \in R = \left[25^{\circ}, 35^{\circ}\right]\cup
+\left[43^{\circ},88^{\circ}\right]$:
+\begin{align}
+    \sigma^{0} &= 2\pi \frac{\alpha^2 }{4E^2} \int_{R} \mathop{d\cos\theta}
+    \frac{1+\cos^2\theta}{1-\cos^2\theta}.
+\end{align}
+The integral is just a numerical factor and we have a dependency $\sigma^{0} \propto
+E_\text{cm} ^{-2}$.
+
+I plotted the results of my comparison in figures \ref{fig:qed1}, \ref{fig:qed2}.
+
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.7\linewidth]{qed1.pdf}
+\caption{Differential cross section in UR limit vs data.}
+\label{fig:qed1}
+\end{figure}
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.7\linewidth]{qed2.pdf}
+\caption{Total cross section in UR limit vs data.}
+\label{fig:qed2}
+\end{figure}
+\newpage
+\section{Exercise 5}%
+\begin{exercise}
+Consider an extension of the QED theory in which, in addition to the fermion
+$f$ of mass $m$ and to the massless photons, a pseudo-scalar particle ($\phi$) of mass
+$\mu$ exists. The interaction Lagrangian of such a theory would be
+\begin{align}
+    \mathcal{L}_\text{I}  = -i e \bar{\psi} \gamma^{\mu} \psi A_\mu - ig
+    \bar{\psi}\gamma^{5}\psi \phi.
+\end{align}
+\end{exercise}
+\subsection{Feynman rules}%
+I build the Feynman rules by analogy with QED and from what I know concerning scalar
+fields. First of all, the propagators in momentum space:
+\begin{align}
+\wick{\c1 \phi(x) \c1\phi(y)} &= 
+\begin{gathered}
+   \feynmandiagram [horizontal=a to b] {
+   a --[scalar, momentum = \(q\)] b
+   }; 
+\end{gathered} = \frac{i}{q^2 - \mu^2 +i\varepsilon}\nonumber \\ 
+\wick{\c1\psi(x) \bar{\c1\psi}(y)} &= 
+\begin{gathered}
+   \feynmandiagram [horizontal=a to b] {
+   a --[fermion, momentum = \(q\)] b
+   }; 
+\end{gathered} = \frac{i( \slashed{p}+m)}{p^2-m^2+i\varepsilon}\nonumber \\ 
+\wick{\c1A_{\mu}(x) \c1A_\nu(y)} &= 
+\begin{gathered}
+   \feynmandiagram [horizontal=a to b] {
+   a --[photon, momentum = \(q\)] b
+   }; 
+\end{gathered} = -\frac{i}{p^2 + i\varepsilon}g_{\mu\nu} \quad\text{(Feynman gauge)}.
+\end{align}
+The external legs are trivial:
+\begin{align}
+    \wick{\c1\phi\vert\c1 p\rangle}  &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a -- [scalar]b[dot]
+        };
+    \end{gathered} = 1 & 
+ \wick{  \langle \c1 p \vert \c1\phi}  &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a[dot] -- [scalar]b
+        };
+    \end{gathered} =1\nonumber \\ 
+    \wick{\c1\psi \vert e^{-};\c1 p, s \rangle} &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a -- [fermion]b[dot]
+        };
+    \end{gathered} = u^{s}(p) & 
+        \wick{ \langle e^{-}; \c1 p, s \vert\bar{\c1\psi}}  &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a[dot] -- [fermion]b
+        };
+    \end{gathered} =\bar{u}^{s}(p)\nonumber \\ 
+    \wick{\c1{\bar{\psi}} \vert e^{+}; \c1 p, s \rangle} &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a -- [anti fermion]b[dot]
+        };
+    \end{gathered} = \bar{v}^{s}(p) & 
+        \wick{ \langle e^{+}; \c1 p, s\vert\c1\psi}  &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a[dot] -- [anti fermion]b
+        };
+    \end{gathered} =\bar{u}^{s}(p)\nonumber \\ 
+    \wick{\c1 A_\mu \vert \c1 p \rangle}  &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a -- [photon]b[dot]
+        };
+    \end{gathered} = \varepsilon_\mu (p) & 
+    \wick{\langle \c1 p \vert\c1 A_\mu }  &= 
+    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        a[dot] -- [photon]b
+        };
+    \end{gathered} = \varepsilon^\star_\mu (p).
+\end{align}
+For the vertices, we still have the standard QED vertices (2 fermionic lines, 1 photon
+line); similarly, since the scalar coupling term has 3 fields, LSZ + Wick's theorem tell
+me that there must be three legs for a nonvanishing contribution to the scattering
+amplitude.  Then I can just spew out the result. 
+\newpage
+\begin{align}
+\begin{gathered}
+    \feynmandiagram [horizontal=a to b] {
+    i1 -- [fermion] a -- [fermion] i2, 
+    a -- [photon]b [particle = \(\mu\)] 
+    };
+\end{gathered} &= -ie \gamma^{\mu},&
+\begin{gathered}
+    \feynmandiagram [horizontal=a to b] {
+    i1 -- [fermion] a -- [fermion] i2, 
+    a -- [scalar]b     };
+\end{gathered} &= - i g \gamma^{5}.
+\end{align}
+The rest is the usual.
+\begin{itemize}
+    \item Impose 4-momentum conservation at each vertex ($2\pi^{4}\delta^{(4)}(\ldots)$).
+    \item For each free 4-momentum $q$, integrate over $\int
+    \frac{\mathop{d^4q}}{(2\pi)^4}$.
+    \item For each fermionic loop or exchange of identical fermions, add a minus sign. 
+\end{itemize}
+\subsection{Feynman diagrams}%
+The initial and final states for 
+\begin{align}
+    \gamma e^{-}\to e^{-} \pi
+\end{align}
+(where I gave the pseudoscalar particle a name) are
+\begin{align}
+    \ket{\Phi_\alpha}  &= \ket{\gamma; \lambda,k} \otimes \ket{e^{-}; p,s} = \sqrt{2E_k
+    2E_p} a^\dagger (k,\lambda) c^\dagger (p,s) \ket{0} \nonumber \\ 
+    \ket{\Phi_\beta}  &= \ket{\pi; k^\prime} \otimes \ket{e^{-}; p^\prime,s^\prime} =
+    \sqrt{2E_{k^\prime} 2E_{p^\prime}} \pi^\dagger (k^\prime) c^\dagger
+    (p^\prime,s^\prime) \ket{0} .
+\end{align}
+At leading order, I found two diagrams:
+\begin{align}
+i \mathcal{M} = 
+\underbrace{    \begin{gathered}
+        \feynmandiagram [horizontal=a to b] {
+        i1 [particle=\(u^{s}(p)\)] -- [fermion] a -- [photon] i2 [particle={\(\varepsilon(
+        k,\lambda) \)}],
+        a -- [fermion, momentum'=\(q\)] b,
+        f1 [particle=\(\pi(k^\prime)\)] -- [scalar] b -- [fermion] f2
+        [particle=\(u^{s^\prime}(p^\prime)\)],
+        };
+    \end{gathered}}_{i\mathcal{M}_s}+
+    \underbrace{\begin{gathered}
+                    \feynmandiagram [vertical=a to b] {
+                    i1 [particle = {\(\varepsilon(k, \lambda)\)}] -- [photon] a ,
+                    i2 [particle = \(u^{s}(p)\)] -- [fermion]b -- [fermion,momentum =
+                    \(\tilde{q}\)] a,
+                    b -- [scalar] f2 [particle = \(\pi (k^\prime)\)] ,
+                    a -- [fermion] f1 [particle = \(u^{s^\prime}(p^\prime)\)] , 
+                    };
+                \end{gathered}}_{i\mathcal{M}_u}.
+\end{align}
+As a sidenote: I think I used an unconventional form for the Mandelstam variables, as the
+channel I called u is more of a t channel. Also, we do not need to include both t and u
+channels as the final state particles are distinguishable.
+
+Going upstream as usual,
+\begin{align}
+    \mathcal{M}_s &= - \frac{eg}{q^2-m^2 +i\varepsilon} \bar{u}^{s^\prime} (p^\prime)
+    \gamma^{5} (\slashed{q} + m) \gamma^{\mu} u^{s}(p) \varepsilon_\mu (k,\lambda),\nonumber \\ 
+    \mathcal{M}_u &= - \frac{eg}{\tilde{q}^2-m^2 +i\varepsilon} \bar{u}^{s^\prime} (p^\prime)
+    \gamma^{\mu} (\tilde{\slashed{q}} + m) \gamma^{5} u^{s}(p) \varepsilon_\mu
+    (k,\lambda), \label{5.199}
+\end{align}
+and 4-momentum conservation dictataes 
+\begin{align}
+    q &= p + k = p^\prime +k^\prime\nonumber \\ 
+    \tilde{q} &= p-k^\prime = p^\prime - k.
+\end{align}
+\subsection{Unpolarised square matrix element}%
+The procedure here reads as in the last exercise. We have to compute 3 Dirac traces.
+There is one key difference when taking the h.c. of the scattering amplitude: 
+\begin{rmk}
+Here the h.c. picks up a minus sign due to gamma 5 algebra.
+\end{rmk}
+\begin{proof}
+Relies on $\gamma^{5}$ anticommuting with $\gamma^{\mu}$ and it being hermitian.
+    \begin{align}
+        \mathcal{M}^\dagger &\propto \left[\bar{u}^{s^\prime}\gamma^{5}(\slashed{q} + m)
+        \gamma^{\mu} u^{s}\right] \nonumber \\ 
+        &= \left(u^{s}\right)^\dagger \gamma^{0}\gamma^{\mu}\cancel{\gamma^{0}} (q_\rho
+       \cancel{ \gamma^{0}}\gamma^{\rho}\gamma^{0} + m)\gamma^{5} \gamma^{0}u^{s}\nonumber \\ 
+        &= \bar{u}^{s}\gamma^{\mu} (\slashed{q}+m)
+        \underbrace{\gamma^{0}\gamma^{5}\gamma^{0}}_{-\gamma^{5}} u^{s}\nonumber \\ 
+        &= - \bar{u}^{s} \gamma^{\mu} \left(\slashed{q}+m\right) \gamma^{5}u^{s}.
+    \end{align}
+\end{proof}
+\subsubsection{Trace 1/3}%
+The square of $\mathcal{M}_s$ is 
+\begin{align}
+    \left|\mathcal{M}_s\right|^2 &= -\frac{g^2e^2}{(q^2-m^2)^2} \bar{u}^{s^\prime}(p^\prime )
+    \gamma^{5}(\slashed{q}+m) \gamma^{\mu}u^{s}(p) \bar{u}^{s}(p) \gamma^{\mu^\prime }
+    (\slashed{q}+m ) \gamma^{5}u^{s^\prime }(p^\prime) \varepsilon_\mu (k,\lambda)
+    \varepsilon_{\mu^\prime }(k,\lambda ).
+\end{align}
+Then we ought to sum over spin and polarisation states and normalise over possible inital
+states (2 spin states $\times $ 2 helicity states). At the end, I get a trace; spinor completeness gives me
+a $(\slashed{p}^\prime + m) $ and a $(\slashed{p}+m)$, polarisation sums give me a
+$g_{\mu\mu^\prime }$ and the averaged amplitude is
+\begin{align}
+    \left|\overline{\mathcal{M}}_u\right|^2 &= -\frac{g^2 e^2}{4(q^2-m^2)^2}
+    \Tr\left\{\mathbin{\color{teal}(\slashed{p}^\prime + m ) \gamma^{5}}
+    (\slashed{q}+m)\mathbin{\color{magenta}
+    \gamma^{\mu}(\slashed{p}+m) \gamma_\mu} (\slashed{q}+m)\mathbin{\color{teal}\gamma^{5}}\right\}.
+\end{align}
+Workable. I move the last $\mathbin{\color{teal}\gamma^{5}}$ over to the left and terms in
+teal become
+\begin{align}
+\mathbin{\color{teal}    \gamma^{5} (\slashed{p}^\prime+m)\gamma^{5}}&\mathbin{\color{teal}= \gamma^{5}\gamma_\rho
+    \gamma^{5}(p^\prime)^{\rho} + m (\gamma^{5})^2}\nonumber \\ 
+    & \mathbin{ \color{teal}=-\gamma_\rho (p^\prime)^{\rho} + m= (-\slashed{p}^\prime+m)
+}\end{align}
+(thanks to $\gamma^{5}\gamma^{5}= 1$ and $\{\gamma^{5},\gamma^{\mu}\} = 0$). The terms in
+magenta become (according to \eqref{gronz})
+\begin{align}
+    \mathbin{\color{magenta}\gamma^{\mu}(\slashed{p}+m)\gamma_\mu = -2\slashed{p} + 4m}
+\end{align}
+and our trace becomes
+\begin{align}
+\left|\overline{\mathcal{M}}_s\right|^2  =-\frac{e^2 g^2}{4 (q^2-m^2)^2}2 \Tr \left\{(\slashed{p}^\prime - m) (\slashed{q}+m)
+    (\slashed{p} - 2m) (\slashed{q} +m)\right\}.
+\end{align}
+Forgetting temporarily about the prefactor, I decompose the trace (keeping only even
+numbers of gamma matrices):
+\begin{align}
+\Tr\left\{1\right\}  &= \Tr\left\{\slashed{p}^\prime \slashed{q} \slashed{p}
+\slashed{q}\right\}+ \Tr \left\{\slashed{p}^\prime \slashed{q} (-2m) m\right\} +
+\Tr\left\{\slashed{p}^\prime m \slashed{p} m\right\} +\Tr\left\{\slashed{p}^\prime m (-2m)
+\slashed{q}\right\}+ \nonumber \\ 
+&+ \Tr\left\{(-m) \slashed{q} \slashed{p} m\right\} + \Tr\left\{(-m) \slashed{q} (-2m)
+\slashed{q}\right\} + \Tr\left\{(-m)m
+\slashed{p}\slashed{q}\right\}+\Tr\left\{(-m)m(-2m)m\right\}\nonumber \\ 
+&= \Tr\left\{\slashed{p}^\prime \slashed{q}\slashed{p}\slashed{q}\right\} + m^2 \Tr\left\{\slashed{p}^\prime
+\slashed{p}\right\} - 4m^2 \Tr\left\{\slashed{p}^\prime \slashed{q}\right\} + 2m^2
+\Tr\left\{\slashed{q}\slashed{q}\right\} -2m^2 \Tr\left\{\slashed{p}\slashed{q}\right\} +
+2m^{4}\Tr \mathbb{I} .
+\end{align}
+The only term that needs some work is the first one. Using 
+\begin{align}
+\Tr \gamma^{\mu}\gamma^{\nu} \gamma^{\alpha}\gamma^{\beta} =
+4\left(g^{\mu\nu}g^{\alpha\beta} - g^{\mu\alpha}g^{\nu\beta} +
+g^{\mu\beta}g^{\nu\alpha}\right),
+\end{align}
+substituting $g^{\mu\nu} \to  \cdot $,
+\begin{align}
+    \Tr \slashed{p}^\prime \slashed{q} \slashed{p} \slashed{q} &= 4 \left[\left(p^\prime
+    \cdot q\right)\left(p \cdot  q\right) - \left(p^\prime\cdot p\right)\left(q\cdot
+    q\right) + \left(p^\prime\cdot q\right)\left(q\cdot p\right)\right]\nonumber \\ 
+    &= 4 \left[2 (p^\prime q) (pq) - q^2(pp^\prime ) \right].
+\end{align}
+Thus
+\begin{align}
+    \Tr\left\{1\right\}&= 4 \left[2(p^\prime q) (pq ) - q^2(p^\prime p )
+    + m^2 ( p^\prime p - 4 p^\prime q + 2 q^2 - 2 pq) + 2m^{4}\right] \nonumber \\ 
+    &= 4 \left\{ 2 [p^\prime \cdot  (p^\prime+ k^\prime)][p\cdot  (p+k)] - q^2 pp^\prime +
+    m^2 [-4 p^\prime(p^\prime+k^\prime) - 2p (p+k) +p p^\prime +2 q^2 ] +2m^{4}\right\}\nonumber \\ 
+    &= 4 [ 2 (m^2 + p^\prime k^\prime) (m^2 + pk) - q^2 pp^\prime + m^2 ( -4m^2 -
+    4p^\prime k^\prime -2m^2 - 2pk + pp^\prime +2q^2 ) +2m^{4}]\nonumber \\ 
+&= 4 \{ 2m^4 + 2m^2 (\cancel{pk}+ p^\prime k^\prime) + 2(pk)(p^\prime k^\prime) - q^2 pp^\prime
++m^2 (-4p^\prime k^\prime -\cancel{ 2pk} + pp^\prime +2q^2 ) -4m^{4} \}\nonumber \\ 
+&= 4 [2 (p^\prime k^\prime ) (p k) - q^2 p p^\prime + m^2
+p p^\prime - 2m^2 p^\prime k^\prime +2m^2q^2-2m^4 ].
+\end{align}
+In terms of the Mandelstam:
+\begin{align}
+s & = (p+k)^2= q^2 & \implies  q^2 &= s\nonumber \\ 
+    s &= (p+k)^2 = m^2 + pk & \implies pk &= \frac{1}{2}(s-m^2)\nonumber \\ 
+&= (p^\prime+k^\prime)^2 = m^2 +\mu ^2 + 2p^\prime k^\prime & \implies p^\prime k^\prime
+&= \frac{1}{2}(s-m^2-\mu^2) \nonumber \\ 
+t &= (p-p^\prime) ^2 = 2m^2 - 2pp^\prime & \implies pp^\prime &= \frac{1}{2}(2m^2 - t)\nonumber \\ 
+&&s+u+t &= 2m^2 +\mu^2
+\end{align}
+and the trace becomes
+\begin{align}
+\Tr\left\{1\right\} &= 4(2(pk-m^2)p^\prime k^\prime + (m^2-q^2)p p^\prime + 2m^2q^2
+-2m^{4}) \nonumber \\ 
+&= 4 [ 2 (\frac{s-m^2}{2}-m^2)\frac{1}{2}(s-m^2-\mu^2) + \frac{1}{2}(m^2-s)(2m^2-t) +
+2m^2s - 2m^{4})\nonumber \\ 
+&= 4[ \frac{1}{2}(s-3m^2)(s-m^2-\mu^2) + m^{4} - \frac{1}{2}m^2t - m^2s +\frac{1}{2}st
++2m^2s - 2m^{4}]\nonumber \\ 
+&= 4[ \frac{1}{2}(s^2-m^2s -\mu^2s -3m^2s +3m^{4}+3m^2\mu^2) - m^{4} - \frac{1}{2}m^2t
++m^2s + \frac{1}{2}s t]\nonumber \\ 
+&= 2(s^2- 4m^2s - \mu^2s +3m^{4} +3m^2\mu^2) - 4m^{4} -2m^2t + 4m^2s +2st\nonumber \\ 
+&= 2s^2 -4m^2s - 2\mu^2 s - 2m^2 t +2st +2m^{4}+6m^2\mu^2.
+\end{align}
+This looks nicer if I remove the $t = 2m^2 + \mu^2 - u - s$: we have:
+\begin{align}
+    -2m^2t &= -2m^2 (2m^2 + \mu^2- s-u) = -4m^{4}-2m^2\mu^2 +2m^2 - s +2m^2u\nonumber \\ 
+2st&= 2s (2m^2 +\mu^2 - s-u) = 4m^2s + 2\mu^2 s -2s^2 - 2su
+\end{align}
+and I get
+\begin{align}
+    \boxed{
+        \Tr\left\{1\right\} = 4 (m^2(s + u)  -su+2m^2\mu^2- m^{4} )
+        .}
+\end{align}
+
+\subsubsection{Trace 2/3}%
+The second trace would be the square of the $u$ channel: 
+\begin{align}
+    \left|\overline{\mathcal{M}}_u\right|^2 &= \frac{e^2g^2}{4(\tilde{q}^2-m^2)^2}
+    \bar{u}^{s^\prime }(p^\prime) \gamma^{\mu} (\slashed{q} + m ) \gamma^{5}u^{s}(p)
+    (-\gamma^{5}) (\slashed{q}+m)\gamma_\mu \bar{u}^{s^\prime}(p^\prime)\nonumber \\ 
+    &= -\frac{e^2g^2}{4(\tilde{q}^2-m^2)^2} \Tr\left\{(\slashed{p}^\prime + m)
+    \gamma^{\mu}(\tilde{\slashed{q}}+m) \gamma^{5}(\slashed{p}+m)\gamma^{5}
+    (\tilde{\slashed{q}}+m)\gamma_\mu\right\}.
+\end{align}
+The gamma matrix order in the previous trace was $\gamma^{5}\ldots \gamma^{5}\ldots
+\gamma^{\mu}\ldots\gamma_\mu$; here it is $\gamma^{\mu}\ldots\gamma_\mu \ldots
+\gamma^{5}\ldots\gamma^{5}$ ($ \gamma^{\mu}\gamma_\mu = \gamma_\mu \gamma^{\mu}$). So here I make a cyclic permutation:
+\begin{align}
+    \left|\overline{\mathcal{M}}_u\right|^2 &= -\frac{e^2g^2}{4 (\tilde{q}^2 - m^2)^2}
+    \Tr\left\{\gamma^{5} (\slashed{p} + m) \gamma^{5} (\tilde{\slashed{q}}+m)\gamma^{\mu}
+    (\slashed{p}^\prime +m) \gamma_\mu (\tilde{\slashed{q}}+m)\right\}.
+\end{align}
+Now I can paste the previous result with the formal substitutions 
+\begin{align}
+    p &\leftrightarrow p^\prime ,\nonumber \\ 
+    q & \leftrightarrow \tilde{q}.
+\end{align}
+The second line tells me I have to substitute $\tilde{q}= p-k^\prime $ in place for $q =
+p^\prime + k^\prime \to  p + k^\prime$ which is satisfied if I substitute $k^\prime\to  -
+k^\prime$, and likewise: $\tilde{q} = p^\prime - k $ in place of $q = p + k \to
+p^\prime +k $ means $k\to -k$. In terms of the Mandelstams, I get
+\begin{align}
+    s &= (p+k)^2 \to  (p^\prime-k)^2 = u \nonumber \\ 
+    t &= (p-p^\prime)^2 \to  (p^\prime-p)^2 = t \nonumber \\ 
+    u &= (p-k^\prime ) ^2 \to  (p^\prime + k^\prime) = s
+\end{align}
+which perchance is excessive yapping to say that the $u$ channel is obtained by switching
+$s\leftrightarrow u$. Since the trace is symmetric wrt these two variables, I get the same
+result:
+\begin{align}
+    \boxed{
+        \Tr\left\{2\right\} = 4 (m^2(s +u)  -su+2m^2\mu^2- m^{4} ).
+        }
+\end{align}
+
+\subsubsection{Trace 3/3}%
+The interference term. I read it off \eqref{5.199}.
+\begin{align}
+  \frac{1}{4}  \mathcal{M}_s \mathcal{M}_u^\star &= \frac{e^2g^2}{4(s-m^2)(u-m^2)} (-)\Tr
+    \left\{(\slashed{p}^\prime +m)\gamma^{5}(\slashed{q} +m) \gamma^{\mu}(\slashed{p}+m )
+    \gamma^{5}(\tilde{\slashed{q}}+m) \gamma_\mu\right\}.
+\end{align}
+Moving the $\gamma^{5}$ around:
+\begin{align}
+   - \Tr\left\{3\right\} &= -\Tr\left\{\gamma_\mu
+    (\slashed{p}^\prime+m)\gamma^{5}(\slashed{q}+m)\gamma^{\mu}(\slashed{p}+m)\gamma^{5}(\tilde{\slashed{q}}+m)\right\}\nonumber \\ 
+    &= -\Tr \left\{ \gamma_\mu (\slashed{p}^\prime+ m) (-\slashed{q}
+    +m)\gamma^{5}\gamma^{\mu}\gamma^{5}(-\slashed{p}+m) (\tilde{\slashed{q}}+m)\right\}\nonumber \\ 
+    &= +\Tr\{\underbrace{\gamma_\mu (\slashed{p}^\prime+m)
+    (\slashed{q}-m)\gamma^{\mu}}_{A}(\slashed{p}-m) (\tilde{\slashed{q}}+m)\}
+\end{align}
+so this time around I can forget about the minus sign. As in the previous exercise, $A$
+becomes
+\begin{align}
+    A &= -m^2 \gamma_\mu \gamma^{\mu} + m \gamma_\mu (-\slashed{p}^\prime +
+    \slashed{q})\gamma^{\mu} + \gamma_\mu \slashed{p}^\prime \slashed{q}\gamma^{\mu} .
+\end{align}
+Plugging the usual Dirac algebra \eqref{dalgebra}, 
+\begin{align}
+    A &= -4m^2 +2 m (\slashed{p}^\prime-\slashed{q}) +4p^\prime\cdot q
+\end{align}
+and the trace is (keeping only even numbers of gamma matrices in the second line)
+\begin{align}
+   \Tr\left\{3\right\}  &= \Tr\left\{[4(p^\prime q - m^2) +
+   2m(\slashed{p}^\prime-\slashed{q}]x\left[(\slashed{p}-m)(\tilde{\slashed{q}}+m)\right]
+   \right\}\nonumber \\ 
+   &= 4(-m^2 + p^\prime q) \Tr\left(\slashed{p} \tilde{\slashed{q}}-m^2\right) + 2m^2
+   \Tr\left\{(\slashed{p}^\prime-q)(\slashed{p}-\tilde{\slashed{q}})\right\}\nonumber \\ 
+   &= 16(-m^2 +p^\prime q)(p \tilde{q} - m^2) +2m^2 (p^\prime-q)(p- \tilde{q})\nonumber \\ 
+   &= 16 (p^\prime q)(p \tilde{q}) + 16m^{4} + 8m^2
+   ( -2p\tilde{q} -  2p^\prime q +p^\prime p - p^\prime \tilde{q} - qp +q\tilde{q}). 
+\end{align}
+As usual, $q = k+p = k^\prime +p^\prime $, $\tilde{q} = p-k^\prime = p^\prime-k$. In terms
+of the Mandelstam,
+\begin{align}
+    p^\prime q &= p^\prime (p^\prime+k^\prime) = m^2 +p^\prime k^\prime = m^2 +
+    \frac{1}{2}(s-\mu^2 -m^2)
+    \nonumber \\ 
+    &= \frac{1}{2}(m^2 - \mu^2 +u) \nonumber \\ 
+    qp &= p(p+k) = m^2 + pk = m^2 + \frac{1}{2}(s-m^2) \nonumber \\ 
+    &= \frac{1}{2}(s+m^2)\nonumber \\ 
+    p^\prime p &= \frac{1}{2}(2m^2 - t) 
+\end{align}
+and substituting $p \leftrightarrow p^\prime, $ $q \leftrightarrow \tilde{q}$ on the LHS, I get
+$u\leftrightarrow s$ on the RHS so these follow painlessly:
+\begin{align}
+    p \tilde{q} &= \frac{1}{2}(u - \mu^2 +m^2)\nonumber \\ 
+    \tilde{q} p^\prime &= \frac{1}{2}(u+m^2)
+\end{align}
+and finally
+\begin{align}
+    q\tilde{q}&= (p-k^\prime)(p+k) = m^2- k^\prime p +pk - kk^\prime\nonumber \\ 
+    &= m^2 - \frac{1}{2}(m^2 +\mu^2 - u + s - m^2 - \mu^2 - t)\nonumber \\ 
+    &= \frac{1}{2}(-2\mu^2 + u + t + s).
+\end{align}
+Performing all due substitutions, 
+\begin{align}
+    \Tr{3} &= 4 (s-\mu^2 + m^2)(m^2-\mu^2+u)+ 16m^{4}+ 4m^2 (-4m^2 + 4\mu^2 -2 u -2 s + \nonumber \\ 
+    & \phantom{=(} + 2m^2 - \cancel{t} - s - m^2 - u - m^2 - 2 \mu^2 +u + s
+    +\cancel{t})\nonumber \\ 
+    &=  4 \left(m^2 s - \mu^2s + us - \cancel{\mu^2m^2 }+ \mu^{4}- \mu^2 u + m^{4} - \cancel{m^2 \mu^2} +
+    m^2u\right)  + 16m^{4} +   \nonumber \\  
+    & \phantom{=} + 4m^2 ( -4m^2 +\cancel{2\mu^2 }  -2 u -2s ) \nonumber \\ 
+    &= 4 (- m^2 s - \mu^2 s -m^2 u - \mu^2 u + us  + m^{4}+\mu^{4})
+\end{align}
+or 
+\begin{align}
+    \boxed{
+        \Tr\left\{3\right\} = 4 ( - (m^2 + \mu^2)(u+s) + us +m^{4}+\mu^{4}).
+        }
+\end{align}
+\subsubsection{Unpolarised square matrix element}%
+Recollecting:
+\begin{align}
+    \left|\overline{\mathcal{M}}\right|^2 &= \left|\overline{\mathcal{M}}_s\right|^2 +
+    \left|\overline{\mathcal{M}}_u\right|^2 + 2 \mathfrak{Re}
+    \overline{\mathcal{M}_u^\star\mathcal{M}_s} \nonumber \\ 
+    &= -\frac{g^2e^2}{4 (s-m^2)^2} \Tr\left\{1\right\} - \frac{g^2
+    e^2}{4(s-m^2)^2}\Tr\left\{2\right\} + 2 \frac{e^2 g^2}{4(s-m^2)(u-m^2)}
+    \Tr\left\{3\right\}\nonumber \\ 
+    &= (m^{4} - m^2 (u + s) +su - 2m^2\mu^2)\left(\frac{1}{(s-m^2)^2}+
+    \frac{1}{(u-m^2)^2}\right) + \nonumber \\ &+ 2 \frac{ - (m^2+\mu^2)(s+u)+su+\mu^{4}+
+    m^{4}}{(s-m^2)(u-m^2)}.
+\end{align}
+I couldn't bring this to a much nicer form. Best I could do is
+\begin{align}
+    \boxed{
+        \left|\overline{\mathcal{M}}\right|^2= (m^{4}- 2m^2 \mu^2 -  m^2(u+s)
+        +su)\left(\frac{1}{s-m^2} + \frac{1}{u-m^2}\right)^2 + 2 \frac{-\mu^2 (s+u) +su
+        +\mu^{4}+ 2m^2\mu^2}{(s-m^2)(u-m^2)}
+        } \label{matrixElement}
+\end{align}
+which fits in one line (almost). This was a long calculation for which I found no
+references, so to save time in case it is wrong: the expressions $\Tr\left\{\ldots\right\}$ I also evaluated with
+the FeynCalc package for Mathematica, and their results are correct. Possible mistakes must be
+before or after that step.
+\subsection{Cross section in lab frame}%
+\subsubsection{Cross section expression}%
+The $2\to  2$, $pk\to p^\prime k^\prime$ differential cross section is given by 
+\begin{align}
+   \mathop{d\sigma} &= \frac{1}{2E_p 2E_k \left|v_p - v_k\right|}
+   \frac{\mathop{d^3p^\prime}}{(2\pi)^3} \frac{\mathop{d^3k^\prime }}{(2\pi)^3}
+   \frac{1}{2E_{p^\prime }} \frac{1}{2E_{k^\prime }}
+   \left|\overline{\mathcal{M}}\right|^2 (2\pi)^{4} \delta^{(4)}(p+k-p^\prime-k^\prime ),
+\end{align}
+where the velocities are defined as $\textbf{v}_p =\textbf{p} / E_p $ etc. In the rest frame of  $p$, $v_p =
+0$, kinematics is straightforward:
+\begin{align}
+  p &= (m,0,0,0)  \nonumber \\ 
+  k &= (\left|k\right|\eqqcolon \omega, \textbf{k}) , \quad \left|\textbf{v}_k\right| = 1.
+\end{align}
+Now I integrate the delta in $\mathop{d^3k^\prime } /(2\pi)^3 $:
+\begin{align}
+   \mathop{d\sigma} &= \frac{1}{2m 2 \omega}  \frac{\mathop{d^3p^\prime }}{(2\pi)^3}
+   \frac{1}{2E_{p^\prime }} \frac{1}{2E_{k^\prime }}
+   \left|\overline{\mathcal{M}}\right|^2 (2\pi) \delta (m + \omega - E_{p^\prime } -
+   E_{k^\prime }) \nonumber \\ 
+  \frac{d\sigma}{d\Omega} &=\frac{1}{4m\omega} \int \frac{\mathop{dp^\prime } }{(2\pi)^2}
+  \frac{1}{2E_{p^\prime }2E_{k^\prime }}
+  (p^\prime )^2
+  \delta( E_{p^\prime  } + E_{k^\prime } - m - \omega)
+  \left|\overline{\mathcal{M}}\right|^2 .
+\end{align}
+Now I employ the usual $\delta$ identity, 
+\begin{align}
+    \delta (E_{p^\prime } + E_{k^\prime  } - m - \omega) = \delta ( ( (\textbf{p}^\prime
+    )^2+ m^2)^{1
+    /2}  +( (\textbf{k}^\prime )^2 +\mu^2)^{1 /2} - m - \omega)
+\end{align}
+(where $\textbf{k}^\prime  + \textbf{p}^\prime  = \textbf{k}$ from the spatial delta):
+\begin{align}
+    \delta (f(p^\prime)) &= \delta ( ( (\textbf{p}^\prime
+    )^2+ m^2)^{1
+    /2}  +( (\textbf{k}- \textbf{p}^\prime  )^2 +\mu^2)^{1 /2} - m - \omega)\nonumber \\ 
+    &= \frac{1}{\left|f^\prime (p_f)\right|} \delta(p^\prime - p_f), 
+\end{align}
+where $p_f$ is the momentum that satisfies energy conservation ($f(p_f) = 0$) and 
+\begin{align}
+    f^\prime &= \frac{d}{dp^\prime }\left(\sqrt{(\textbf{p}^\prime) ^2 +m^2}  +
+    \sqrt{(\textbf{p}^\prime )^2 - 2p^\prime
+    k\cos\theta + k^2 +\mu^2} - E_k - \mu \right)\nonumber \\ 
+    &= \frac{p_f}{E_{p_f}} + \frac{p_f - k \cos\theta }{E_{k^\prime }}.
+\end{align}
+All together:
+\begin{align}
+    \cfrac{d\sigma}{d\Omega} = \cfrac{1}{4m\omega} \cfrac{p_f^2}{(2\pi)^2} \cfrac{1}{p_f}
+    \frac{1}{2E_{p_f} 2E_{k^\prime }}
+    \cfrac{1}{\cfrac{1}{E_{p_f}}+ \cfrac{1-\frac{\omega}{p_f}\cos\theta}{E_{k^\prime }}}
+    \left|\overline{\mathcal{M}}\right|^2 
+\end{align}
+or better
+\begin{align}
+    \boxed{
+        \frac{d\sigma}{d\Omega} =  \frac{1}{64\pi^2 m} \frac{p_f}{\omega}
+        \left(E_{k^\prime }+ E_{p_f}(1- \frac{\omega}{p_f}\cos\theta)\right)^{-1}
+        \left|\overline{\mathcal{M}}\right|^2 
+        } \label{crossSec}
+\end{align}
+with 
+\begin{align}
+    E_{k^\prime } &= \left( (\textbf{k}-\textbf{p}_f )^2 + \mu^2\right)^{1 /2}\nonumber \\ 
+&= (\omega^2 + p_f^2 -2 \omega p_f \cos\theta + \mu^2)^{1 /2}
+\end{align}
+\subsubsection{Kinematics}%
+(From now on I use $p_f$ instead of $p^\prime $ for the fermionic momentum after
+scattering.) The Mandelstam variables in our reference frame become
+\begin{align}
+    s &= (p+k)^2 = m^2 + 2pk = m^2 + 2m\omega\nonumber \\ 
+    u &= (p -k^\prime )^2 = m^2 + \mu^2 - 2p\cdot  k^\prime  = m^2 + \mu^2 - 2mE_{k^\prime
+    }.\label{242}
+\end{align}
+In the cross section we also have some $p_f, E_{p_f}$ factors. These can be traced back to
+$\omega, \cos\theta$ from energy conservation:
+\begin{align}
+    m + \omega &= E_{p_f} + E_{k^\prime }\nonumber \\ 
+    &= \left(p_f^2 + m^2 \right)^{1 /2} + \left(\omega^2 + p_f^2 - 2 \omega p_f \cos\theta
+    + \mu^2\right)^{ 1/2}.
+\end{align}
+This is not very attractive, however we can move everything to the LHS and get an
+expression of the type $f(p_f, \omega, \cos\theta)= 0$ which I inverted using Mathematica.
+Unfortunately, we have a quadratic equation and thus two solutions:
+\begin{align}
+p_{f,\pm } &= \frac{\omega \left(2 m^2 - \mu^2 + 2 m \omega\right) \cos(\theta) \pm \sqrt{(m +
+\omega)^2 \left[\mu^2 (-4 m^2 + \mu^2 - 4 m \omega) + 4 m^2 \omega^2
+\cos^2(\theta)\right]}}{2 (m + \omega)^2 - 2 \omega^2 \cos^2(\theta)}.\label{243}
+\end{align}
+Moreover we have to enforce $p_f \ge 0 $ which yields a jungle of possible intervals
+depending on $m,\mu,\omega$. For example, the first solution is fine for 
+\begin{itemize}
+    \item For \( m > 0 \) and \( 2 m < \mu \):
+    \begin{align*}
+        & \left( \omega > 0 \quad \land \quad 4 (m + \omega) < \frac{\mu^2}{m} \quad \land \quad -1 \leq \cos(\theta) \leq 1 \right) \\
+        & \lor \left( m + \omega = \frac{\mu^2}{4 m} \quad \land \quad -1 \leq
+        \cos(\theta) < 0 \right) \\
+        & \lor \left( 4 (m + \omega) > \frac{\mu^2}{m} \quad \land \quad \frac{\mu^2}{m} > 2 (\mu + \omega) \quad \land \quad -1 \leq \cos(\theta) \leq -\frac{1}{2} \sqrt{\frac{\mu^2 (4 m^2 - \mu^2 + 4 m \omega)}{m^2 \omega^2}} \right) \\
+        & \lor \left( 2 (\mu + \omega) = \frac{\mu^2}{m} \quad \land \quad \cos(\theta) = -1 \right) \\
+        & \lor \left( \omega = \mu + \frac{\mu^2}{2 m} \quad \land \quad \cos(\theta) = 1 \right) \\
+        & \lor \left( \omega > \mu + \frac{\mu^2}{2 m} \quad \land \quad \frac{1}{2} \sqrt{\frac{\mu^2 (4 m^2 - \mu^2 + 4 m \omega)}{m^2 \omega^2}} \leq \cos(\theta) \leq 1 \right)
+    \end{align*}
+
+    \item For \( 2 m \geq \mu \):
+    \begin{align*}
+        & \left( \omega = \mu + \frac{\mu^2}{2 m} \quad \land \quad \cos(\theta) = 1 \right) \\
+        & \lor \left( \omega > \mu + \frac{\mu^2}{2 m} \quad \land \quad \frac{1}{2}
+        \sqrt{\frac{\mu^2 (4 m^2 - \mu^2 + 4 m \omega)}{m^2 \omega^2}} \leq \cos(\theta)
+        \leq 1 \right).
+    \end{align*}
+\end{itemize}
+Something similar happens for the second solution.
+\begin{itemize}
+    \item For \( \mu > 0 \):
+    \begin{align*}
+        & \left( \omega = \mu + \frac{\mu^2}{2 m} \quad \land \quad \cos(\theta) = 1 \quad \land \quad (2 m \geq \mu \lor m > 0) \right) \\
+        & \lor \left( m > 0 \quad \land \quad \left( 2 m < \mu \quad \land \quad \left( \left( 2 (\mu + \omega) = \frac{\mu^2}{m} \quad \land \quad 1 + \cos(\theta) = 0 \right) \quad \lor \right. \right. \right. \\
+        & \left. \left. \left( \frac{\mu^2}{m} > 2 (\mu + \omega) \quad \land \quad 4 (m + \omega) > \frac{\mu^2}{m} \quad \land \quad 1 + \cos(\theta) \geq 0 \quad \land \quad \sqrt{\frac{\mu^2 (4 m^2 - \mu^2 + 4 m \omega)}{m^2 \omega^2}} + 2 \cos(\theta) \leq 0 \right) \right) \right) \\
+        & \lor \left( \omega > \mu + \frac{\mu^2}{2 m} \quad \land \quad \sqrt{\frac{\mu^2 (4 m^2 - \mu^2 + 4 m \omega)}{m^2 \omega^2}} \leq 2 \cos(\theta) \quad \land \quad \cos(\theta) \leq 1 \right)
+    \end{align*}
+    
+    \item For \( 2 m \geq \mu \) and \( \omega > \mu + \mu^2 / (2 m) \):
+    \begin{align*}
+        & \sqrt{\frac{\mu^2 (4 m^2 - \mu^2 + 4 m \omega)}{m^2 \omega^2}} \leq 2
+        \cos(\theta) \quad \land \quad \cos(\theta) \leq 1.
+    \end{align*}
+\end{itemize}
+The bottom line of this is that I shall relinquish all hope of a general, analytical
+solution. I move onto Python and work in the very first interval, $2m < \mu
+\land 4(m+\omega) < \mu^2 / m$, for which all angles work for $p_{f+}$ and no solution is
+valid for $p_{f-}$.  
+
+Knowing $p_f (\omega,\cos\theta)$ I can easily retrieve $E_{p_f} = \left(m^2 +
+p_f^2\right)^{ 1/2}$. Now all kinematics is parametrised with $\omega$ and
+$\cos\theta$.
+
+I thought it would be nice to plot the differential cross section, since I had to choose
+my parameters anyway. I pick $m = \mu / 3$; the second constraint reduces to $\omega < 5 m
+/4$. As I'd have hoped, the cross section gets small as $\cos\theta \to 1$,
+which corresponds to the fermion being returned to sender, and it is peaked close to
+$\cos\theta \sim -1$, which corresponds to $\theta = \pi$.
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.7\linewidth]{mod_qed.pdf}
+\caption{Differential cross section as function of incoming photon energy.}
+\label{fig:mod_qed}
+\end{figure}
+\subsubsection{Total cross section}%
+The total cross section is, in principle,
+\begin{align}
+    \sigma = 2\pi \int \mathop{d\cos\theta} \frac{d\sigma}{d\Omega}.
+\end{align}
+With our convoluted expression, an analytical solution would serve no purpose. For the
+sake of doing something, I used the data from \ref{fig:mod_qed} and NumPy to find total cross
+sections for the hand-picked $m = \mu / 3$ case. 
+\begin{table}[htpb]
+\centering
+\caption{Total cross sections for $m = \mu /3 $}
+\label{tab:tot_cross_sec_mod}
+\begin{tabular}{|c|c|}
+ $\omega / m$ & $\sigma m^2$ \\
+ \hline
+ $0.1$ &  $73.8$ \\
+ $0.3$ &  $2.51$ \\
+ $0.5$ &  $0.507$ \\
+ $0.8$ &  $0.109$ \\
+ $1.0$ &  $0.0492$ \\
+\end{tabular}
+\end{table}
+
+\subsection{Nonrelativistic limit}%
+For the NR limit I take a low-energy photon, $\omega \to 0$. Crucially, the momentum in
+\eqref{243} does not go to zero but to (I used Mathematica for the limit)
+\begin{align}
+    p_f \to  \frac{\sqrt{m^2\mu^2 (\mu^2-4m^2)} }{2m^2} + \tilde{\lambda} (\cos\theta) \omega
+\end{align}
+for some not-very-nice-looking function of the angle $\tilde{\lambda}(\cos\theta)$, whose
+expression we shall miraculously not need. Similarly, the energy is
+\begin{align}
+    E_{p_f} &= \frac{\mu^2 - 2m^2 }{2m} + \lambda (\cos\theta)\omega.
+\end{align}
+From energy conservation I can find $E_{k^\prime }$:
+\begin{align}
+    E_{k^\prime }&= m + \omega - E_{k}\nonumber \\ 
+    &= 2m + \omega - \frac{\mu^2}{2} - \lambda (\cos\theta)\omega
+\end{align}
+and the Mandelstams reduce to (from \eqref{242}):
+\begin{align}
+   s &= m^2 + 2 m\omega\nonumber \\ 
+  u &= m^2 + \mu^2 - 2m E_{k^\prime } = 2\mu^2 - 3m^2 + 2m(\lambda (\cos\theta) -
+  1)\omega.
+\end{align}
+The squared matrix element \eqref{matrixElement} is
+\begin{align}
+ \left|\overline{\mathcal{M}}\right|^2= \underbrace{(m^{4}- 2m^2 \mu^2 -  m^2(u+s)
+        +su)}_{(1)}\left(\frac{1}{s-m^2} + \frac{1}{u-m^2}\right)^2 + 2 \underbrace{\frac{-\mu^2 (s+u) +su
+        +\mu^{4}+ 2m^2\mu^2}{(s-m^2)(u-m^2)}}_{(2)/(3)}.
+\end{align}
+The term $(1)$ becomes
+ \begin{align}
+    (1) &\overset{\mathcal{O}(1)}{=} m^{4}- 2m^2\mu^2 - m^2(m^2 + 2\mu^2 - 3m^2) + m^2
+    (2\mu^2-3m^2) \nonumber \\ 
+    &= -2m^2\mu^2 + 3m^{4} + 2m^2 \mu^2 - 3m^{4} = 0
+\end{align}
+so we need to go to higher order:
+\begin{align}
+    (1) &\overset{\mathcal{O}(\omega)}{=} -m^2 (2m \omega - 2m \omega + \cancel{2m \lambda \omega})
+    + m^2 (-2m\omega +\cancel{ 2m \lambda \omega}) + (2\mu^2- 3m^2)(2m\omega) \nonumber \\ 
+    &= -2m^3\omega - 6m^3\omega + 4\mu^2 m \omega \nonumber \\ 
+    &= (-8m^3 + 4\mu^2 m) \omega.
+\end{align}
+The second term becomes
+\begin{align}
+     (2) &\overset{\mathcal{O}(\omega)}{=} -\mu^2 (m^2 + 2\mu^2 - 3m^2) + m^2 (2\mu^2 -
+     3m^2 ) + \mu^{4} + 2m^2\mu^2\nonumber \\ 
+     &= 6\mu^2 m^2- \mu^{4} - 3m^{4}.
+\end{align}
+The denominators are of the type
+\begin{align}
+    \frac{1}{s-m^2} = \frac{1}{2m\omega}
+\end{align}
+and
+\begin{align}
+    \frac{1}{u-m^2} = \frac{1}{2(\mu^2 - 2m^2)}.
+\end{align}
+To leading order in $\omega$:
+\begin{align}
+    \left|\overline{\mathcal{M}}\right|^2 &= \frac{(-8m^3 + 4\mu^2 m )
+    \omega}{4m^2\omega^2} + 2 \frac{6\mu^2 m^2 - \mu^{4} - 3m^{4}}{2m \omega (2\mu^2 -
+    4m^{4})}\nonumber \\ 
+    &= \left(\frac{-8m^3 + 4\mu^2 m }{4m^2} + \frac{6\mu^2m^2 - \mu^{4} - 3m^{4}}{2\mu^2 -
+    4m^{4}}\right) \frac{1}{\omega}.
+\end{align}
+As usual this is not particularly attractive, however the takeaway is that
+$\left|\overline{\mathcal{M}}\right|^2 \sim  1 / \omega$. As promised, the ugliest bits
+containing $\lambda(\cos\theta)$ cancel out with I found interesting. The cross section is
+\eqref{crossSec}:
+\begin{align}
+\frac{d\sigma}{d\Omega}=   \frac{1}{64\pi^2m } \frac{p_f}{\omega} \left(E_{k^\prime } + E_{p_f}
+   (1-\frac{\omega}{p_f}\cos\theta)\right)^{-1} \left|\overline{\mathcal{M}}\right|^2 .
+\end{align}
+The factor in parentheses reduces to
+\begin{align}
+    \left(E_{k^\prime } + E_{p_f}\right)^{-1}  = (m+\omega)^{-1} \to \frac{1}{m}
+\end{align}
+(since $p_f$ is finite as $\omega\to 0$). Overall, 
+\begin{align}
+    \boxed{
+        \frac{d\sigma}{d\Omega} \overset{\text{NR}}{=} \frac{1}{64\pi^2}\frac{\sqrt{\mu^2
+        m^2 (\mu^2-4m^2)} }{2m^4} \left(\frac{\mu^2m - 2m^3}{m^2}+\frac{6\mu^2m^2 -
+        \mu^{4}-3m^{4}}{2\mu^2-4m^2}\right) \frac{1}{\omega^2}
+        }
+\end{align}
+and, most notably,
+\begin{align}
+    \boxed{
+        \frac{d\sigma}{d\Omega} \overset{\text{NR}}{\sim}  \frac{1}{\omega^2}.
+        }
+\end{align}
+As foreshadowed in the plot \ref{fig:mod_qed} and in table \ref{tab:tot_cross_sec_mod}, the cross-section blows up in the NR limit.
+The total cross section is just
+\begin{align}
+    \sigma_\text{nr}  = 4\pi \frac{d\sigma_\text{nr} }{d\Omega}
+\end{align}
+since all angular dependence has vanished. I sincerely hope I didn't make a mistake early on.
+
+
+
+
+
+
+\end{document}
+

@@ -1,0 +1,340 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{slashed}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{mathtools}
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\author{Marco Bella}
+\title{Axions}
+%evaluate symbol
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+\DeclareMathOperator{\Tr}{Tr}
+\pdfsuppresswarningpagegroup=1
+\newtheorem*{exercise}{Exercise}
+
+\begin{document}
+\maketitle
+\begin{exercise}[94.2, Srednicki]
+Consider adding to the Standard Model a massless quark, represented
+by a pair of Weyl fermions $\chi$ and $\xi$ in the $3$ and $\bar{3}$ representations
+of SU(3). Also add a complex scalar $\Phi$ in the singlet representation. Assume that these fields have a Yukawa interaction of the form
+$\mathcal{L}_\text{yuk} = y \Phi \chi \xi +\text{h.c.}$, where $y$ is the Yukawa coupling constant.
+Assume that the scalar potential $V(\Phi)$ depends only on $\Phi^\dagger \Phi$.
+\begin{enumerate}    \item Show that the lagrangian is invariant under a Peccei-Quinn
+transformation $\chi \to  e^{i\alpha} \chi$, $\xi \to  e^{i\alpha}\xi$, $\Phi \to
+e^{-2i\alpha}\Phi$, all other fields unchanged.
+\item Show that this global $U(1)_\text{PQ} $ symmetry is anomalous, and that
+$\theta\to \theta - 2\alpha$ under a $U(1)_\text{PQ} $ transformation.
+\item Suppose that $V(\Phi)$ has its minimum at $\left|\Phi\right|= f / \sqrt{2} $, with
+$f \neq 0$.
+Show that this gives a mass to the quark we introduced.
+\item Write $ \Phi = (f + \rho(x) ) e^{i a(x) /f} / \sqrt{2} $ , where $\rho$ and $a$ are fields. Argue that,
+in eq. (94.10), we should replace $\theta$ with $\theta + a/f$, and add to eq. (94.9)
+a kinetic term $+ \partial _\mu a \partial ^{\mu}a   $ for the $a$ field.
+\item Show that the minimum of $V(U)$, defined in eq. (94.11), is at $U=I$ 
+and $a = -f \theta$. Show that P and CP are conserved at this minimum.
+\item The particle corresponding to the a field is the axion; compute its
+mass, assuming $f \gg f_\pi$.
+\item Note that if $f$ is large, the extra quark becomes very heavy, and
+the axion becomes very light. Show that couplings of the axion to
+the hadrons are all suppressed by a factor of $1 /f$. 
+\end{enumerate}
+\end{exercise}
+\begin{enumerate}
+   \item The new QCD lagrangian will be something like
+   \begin{align}
+       \mathcal{L}= -\frac{1}{4}F_{\mu\nu}^{a}F_{\mu\nu}^{a} + \bar{q}(i\slashed{D}-M)q +
+       i \overline{\Psi} \slashed{D} \Psi + \left(\partial _\mu \Phi \right) ^\dagger 
+      \left(\partial _{\mu}\Phi \right) - V(\Phi^\dagger \Phi) +\mathcal{L}_\theta+
+      \mathcal{L}_\text{yuk} \label{lagrangian}
+   \end{align}
+(contracting low-low spacetime indices is abuse of notation but unambiguous) where 
+   \begin{align*}
+       q = \begin{bmatrix} u\\d \end{bmatrix} 
+   \end{align*}
+   contains 2 Dirac spinors $u,d$ (up and down quarks), 
+   \begin{align*}
+       M = \begin{bmatrix} m_u & 0 \\ 0 & m_d \end{bmatrix}
+   \end{align*}
+   is the quark mass matrix,  
+   \begin{align*}
+     \Psi = \begin{bmatrix} \chi \\ \xi ^\dagger  \end{bmatrix}  
+   \end{align*}
+   for two LH Weyls $\chi, \xi$ ($\xi^\dagger $ is then RH), and finally
+   \begin{align*}
+       \mathcal{L}_\theta = \frac{\overline{\theta} g^2}{64\pi^2}
+       \varepsilon^{\mu\nu\alpha\beta}F_{\mu\nu}^{a}F_{\alpha\beta}^{a}
+   \end{align*}
+   is the CP-violating theta lagrangian.
+
+   Under a PQ transformation, the new spinor becomes
+   \begin{align}
+   \Psi = \begin{bmatrix} \chi \\ \xi^\dagger  \end{bmatrix} \to \begin{bmatrix}
+   e^{i\alpha}\chi \\ e^{-i\alpha}\xi^\dagger  \end{bmatrix} = e^{-i\gamma_5
+   \alpha}\Psi\label{1}
+   \end{align}
+   where 
+   \begin{align*}
+       \gamma_5 = \begin{bmatrix} -1 & 0 \\ 0&1 \end{bmatrix} .
+   \end{align*}
+   Likewise,
+   \begin{align*}
+       \overline{\Psi} = \begin{bmatrix} \xi & \chi^\dagger  \end{bmatrix} \to
+       \begin{bmatrix} e^{i\alpha}\xi & e^{-i\alpha}\chi^\dagger \end{bmatrix} =
+       \overline{\Psi}e^{-i\gamma_5\alpha}.
+   \end{align*}
+   Thus the quark kinetic term is invariant (using $\{\gamma_5 , \gamma_\mu \} =0$):
+   \begin{align*}
+       i \overline{\psi}\slashed{D} \Psi =i \overline{\Psi} \gamma_\mu D^{\mu} \Psi &\to i \overline{\Psi}e^{-i\gamma_5
+       \alpha} \gamma_\mu D^{\mu} e^{-i\gamma_5 \alpha} \Psi  \nonumber \\ 
+       &= i \overline{\Psi} \gamma_\mu D^{\mu}
+       e^{+i\gamma_5\alpha}e^{-i\gamma_5\alpha}\Psi = i \overline{\Psi}\slashed{D} \Psi;
+   \end{align*}
+  similarly the scalar kinetic term is trivially invariant
+  \begin{align*}
+      \partial _\mu \Phi^\dagger  \partial ^{\mu}\Phi &\to  \partial _\mu( e^{2i\alpha}
+      \Phi ^\dagger)
+       \partial _\mu  (e^{-2i\alpha} \Phi) \nonumber \\ & = \partial _\mu \Phi^\dagger
+      \partial ^{\mu}\Phi  
+  \end{align*}
+  as is the Yukawa term:
+  \begin{align*}
+  \mathcal{L}_\text{yuk} =y \Phi \chi \xi +\text{h.c.} & \to  y (e^{-2i\alpha} \Phi )(e^{i\alpha}\chi) 
+  (e^{i\alpha}\xi)+\text{h.c.} \nonumber \\ &= y \Phi \chi \xi + \text{h.c.}
+  \end{align*}
+  The potential $V(\Phi)$ by construction depends on $\Phi^\dagger \Phi$ which is
+  obviously invariant. Every other term is unaltered by this tranformation. Thus the
+  Lagrangian is invariant under this global PQ symmetry.
+  \item As can be seen in \eqref{1}, the $U(1)_\text{PQ} $ is actually an axial $U(1)$. In
+  section 76 it is shown that this type of symmetry is anomalous, in that the path
+  integral integration measure picks up the following phase:
+  \begin{align*}
+  D \overline{\Psi}D \Psi \overset{U(1)_\text{PQ} }{\longrightarrow }   D \overline{\Psi} D\Psi \exp \left( -i\frac{g^2\alpha}{32
+  \pi^2}\varepsilon^{\mu\nu\alpha\beta}F_{\mu\nu}^{a}F_{\alpha\beta}^{a} \right) 
+  \end{align*}
+  which effectively shifts the parameter $\overline{\theta}$ of $\mathcal{L}_\theta$:
+  \begin{align*}
+  \exp \left(-i\frac{\overline{\theta} g^2 }{ 64\pi^2}
+  \varepsilon^{\mu\nu\alpha\beta}F_{\mu\nu}^{a}F_{\alpha\beta}^{a}\right)
+  &\overset{U(1)_\text{PQ} }{\longrightarrow }    \exp
+  \left(-i\frac{(\overline{\theta} -2\alpha)g^2 }{ 64\pi^2}
+  \varepsilon^{\mu\nu\alpha\beta}F_{\mu\nu}^{a}F_{\alpha\beta}^{a}\right) \nonumber \\ 
+      \overline{\theta} &\longrightarrow  \overline{\theta}-2\alpha .
+  \end{align*}
+  \item Working near the minimum of the potential to be at $\left|\Phi\right|= f /\sqrt{2}
+  $, we can temporarily write 
+  \begin{align*}
+      \Phi = \frac{f}{\sqrt{2} }+ f(x)
+  \end{align*}
+  and the Yukawa coupling becomes
+  \begin{align*}
+      \mathcal{L}_\text{yuk} &= y \left(\frac{f}{\sqrt{2} }+f(x)\right)\chi \xi + y
+      \left(\frac{f}{\sqrt{2} }+f^\dagger (x)\right)\xi^\dagger \chi^\dagger \nonumber \\ 
+      &=\underbrace{ \frac{yf}{\sqrt{2} } \overline{\Psi} \Psi }_{\mathcal{L}_m}+
+      \underbrace{(y^2 f(x) \chi \xi +\text{h.c.})
+}_{\mathcal{L}^\prime _\text{yuk} }  \end{align*}
+The mass lagrangian has a wrong sign, which can be fixed by a $U(1)_\text{PQ} $ with
+$e^{i\alpha}=  i$. We then can read off the mass of the quark as 
+\begin{align*}
+    m_\Psi = \frac{yf}{\sqrt{2} }.
+\end{align*}
+\item By writing $\Phi = (f + \rho) e^{-ia /f } /\sqrt{2} $ we can immediately see that the
+$a$ field enters as massless degree of freedom (NGB): the potential
+$V(\left|\Phi\right|^2) = V(\rho)$ simply does not see the phase $a/ f$ of the field.
+Neglecting the dynamics of $\rho$ and expanding around the minimum of $V$ ($\rho=0$), the kinetic term becomes
+\begin{align*}
+    \partial ^{\mu} \Phi^\dagger  \partial _\mu \Phi &= \frac{f^2}{2}  (\partial
+    ^{\mu}e^{ia /f} ) (\partial _{\mu} e^{-ia /f})\nonumber \\ 
+    &= \frac{1}{2}\partial ^{\mu}a \partial _\mu a  
+\end{align*}
+which is the kinetic term for a real scalar field. 
+
+Under a $U(1)_\text{PQ} $ transformation, we have seen that
+\begin{align*}
+    \overline{\theta} \to  \overline{\theta} - 2\alpha
+\end{align*}
+due to the anomaly. Because of this, $\overline{\theta}$ by itself cannot have physical
+relevance, as the global $U(1)_\text{PQ} $ can be seen as a simple relabelling of the
+dummy integartion variables of the path integral, with regard to which physics should be agnostic. To restore physical meaning, we observe
+that
+\begin{align*}
+    \text{Arg}\Phi &\to \text{Arg}\Phi -2\alpha\nonumber \\ 
+    \frac{a}{f}&\to \frac{a}{f}+2\alpha
+\end{align*}
+so that the combination
+\begin{align*}
+    \overline{\theta} + \frac{a}{f} \to \overline{\theta} + \frac{a}{f}
+\end{align*}
+is invariant and becomes our new effective $\theta$ angle: we are free to
+set $a = 0$ via axial rotations, but this will affect the theta lagrangian. Alternatively,
+we could rotate away the theta lagrangian but this would shift the axion field around.
+Both of these scenarios preserve the sum  $\overline{\theta}+ a /f$ which is our new effective
+measure of CP violation. 
+
+We are expanding around the minimum of $V$ because we are interested in the low-energy
+theory. Let us temporarily remove axions from the discussion. The low-energy theory of QCD is described by the chiral
+lagrangian, the details of which are beyond the scope of the exercise. A minimal
+description is the following. If we neglect mass terms, the quark part of the lagrangian
+\eqref{lagrangian} is
+invariant under $SU(2)_\text{V} \times SU(2)_\text{A} $, among other things. The
+$SU(2)_\text{V} $ part is realised as isospin symmetry, a consequence of which is e.g.
+$m_p \approx m_n$. We have
+good reasons to believe the axial part to be spontaneously broken instead. This results in 3 Goldstone
+bosons, the pions, which can be modelled by a 2x2 matrix $U \in SU(2)$. We can then write
+an effective field theory lagrangian with pions and nucleons as
+degrees of freedom. For our purposes the pionic part of the lagrangian suffices, which looks like this:
+\begin{align}
+    \mathcal{L} = \frac{1}{4}f_\pi ^2 \Tr \partial ^{\mu}U^\dagger \partial _\mu U +v^3
+    \Tr \left(MU + \text{h.c.}\right)  .\label{3}
+\end{align}
+There is a technical detail which requires some care. $M$ is still the quark mass
+matrix, however it picks up the CP-violating phase that used to be in the theta lagrangian:
+\begin{align*}
+    M = \begin{bmatrix} m_u & 0 \\0 & m_d \end{bmatrix} e^{i \overline{\theta} /2}.
+\end{align*}
+The intuitive reason is that we did not include the theta term in our EFT lagrangian, but
+our CP violation has to go somewhere. For our quark doublet $q = (\chi, \xi^\dagger )$, the mass lagrangian looks like
+\begin{align*}
+  \mathcal{L}_\text{mass} &= -\bar{q}Mq \nonumber \\ 
+  &= - M_{ij}\chi_i \xi_j +\text{h.c.}
+\end{align*}
+Under a $U(1)_\text{A} $, 
+\begin{align*}
+    \mathcal{L}_\text{mass}  \to  -M_{ij}e^{2i\alpha} \chi_i \xi_j +\text{h.c.}
+\end{align*}
+and thus 
+\begin{align*}
+    M_{ij}\to M_{ij}e^{2i\alpha}.
+\end{align*}
+Since we are rotating two quarks now, and the theta lagrangian will pick up a $-2\alpha$ for
+each anomalous rotation, the effective theta parameter undergoes
+\begin{align*}
+\mathcal{L}_\theta (\overline{\theta}) \to  \mathcal{L}_\theta
+(\overline{\theta}-4\alpha).
+\end{align*}
+Then I can rotate the $\mathcal{L}_\theta$ out of the lagrangian, by setting $\alpha =
+\overline{\theta} /4$, but I will pay half of that phase into the mass lagrangian:
+\begin{align*}
+\mathcal{L}_{\theta} &\to 0\nonumber \\ 
+    M_{ij}&\to e^{i \overline{\theta} /2}
+\end{align*}
+as promised. When we put axions back into the treatment, the only thing we have to change
+is 
+\begin{align*}
+    \overline{\theta} \xrightarrow[\text{axions}]{\text{include}}  \overline{\theta} +\frac{a}{f}.
+\end{align*}
+\item The previous point of the exercise gives us a potential for the low-energy theory
+which depends on the axion field. The potential we can read off \eqref{3} as
+\begin{align*}
+    V(U,a) = - v^3 \Tr \left(MU+\text{h.c.}\right)
+\end{align*}
+with 
+\begin{align*}
+    M = \begin{bmatrix} m_u & 0 \\ 0 & m_d \end{bmatrix} e^{\frac{i}{2}(\overline{\theta}
+    + a /f)}.
+\end{align*}
+For the minimum, we want to maximise the trace $\Tr MU$. As $U$ is an $SU(2)$ matrix, it
+must be of the form
+\begin{align*}
+    U = \begin{bmatrix} c & b \\ -b^\star & c^\star\end{bmatrix} , \quad 
+    \left|c\right|^2 +\left|b\right|^2 =1.
+\end{align*}
+The trace is
+\begin{align*}
+    \Tr MU = (m_u c + m_d c^\star )e^{\frac{i}{2}(\overline{\theta} + a /f)}
+\end{align*}
+and it is clear that our best shot at maximising it is for $b= 0$, because otherwise
+$\left|c\right|^2 < 1$ (from the condition $\left|c\right|^2 + \left|b\right|^2 =1 $). In general, 
+\begin{align*}
+    U = \begin{bmatrix} e^{i\lambda} &0 \\ 0 & e^{-i\lambda} \end{bmatrix} 
+\end{align*}
+and the potential becomes
+\begin{align*}
+    V(\lambda, a) &= -v^3 \left[m_ue^{i\lambda + \frac{1}{2}(\overline{\theta}+ a /f)} +
+    m_de^{-i\lambda + \frac{1}{2}(\overline{\theta}+ a /f)}\right]\nonumber \\ 
+    &= -2v^3 \left\{m_u\cos\left[\lambda +\frac{1}{2}\left(\overline{\theta} +
+    \frac{a}{f}\right)\right] + m_d \cos\left[\lambda -\frac{1}{2}\left(\overline{\theta}
+    + \frac{a}{f}\right)\right]\right\}
+\end{align*}
+which is minimised for $\cos\left(\ldots\right)=1$ (for both cosines), realised for
+\begin{align*}
+    \lambda &= 0  \quad \implies U = \mathbb{I}\nonumber \\ 
+    \overline{\theta}+ \frac{a}{f}&=0
+\end{align*}
+i.e. the CP-violating term relaxes to zero. 
+
+\item The potential we have just written explicitly breaks the $U(1)_\text{PQ} $ symmetry
+by giving the axion a potential. Axion mass can be computed expanding the axion field as
+\begin{align*}
+    a = -f \overline{\theta} + \tilde{a},
+\end{align*}
+and then calculating the curvature in the $\tilde{a}$ direction. Here we exploit the assumption $f\gg f_\pi$
+of the exercise, which means the following: minimise the energy with respect to $\lambda$,
+and then expand the potential which now only depends on $\tilde{a}$. The assumption is
+equivalent to assuming that pions have infinite mass ($m_\pi \sim  1 /f_\pi$ it turns out), so that they decouple from the
+dynamics and we simply set their potential to be at the minimum:
+\begin{align*}
+    \frac{\partial V}{\partial \lambda} &= 2v^3 \left\{m_u \sin \left[\lambda +
+    \frac{\tilde{a}}{2f}\right] + m_d \sin \left[\lambda -
+    \frac{\tilde{a}}{2f}\right]\right\}\nonumber \\ 
+    & = 2v^3\left[m_u \left(\sin\lambda \cos \frac{\tilde{a}}{2f} +\cos\lambda \sin
+    \frac{\tilde{a}}{2f}\right) + m_d \left(\sin\lambda \cos \frac{\tilde{a}}{2f} -
+    \cos\lambda \sin \frac{\tilde{a}}{2f}\right) \right] \overset{!}{=} 0
+\end{align*}
+and the minimum is thus at
+\begin{align*}
+(m_u+m_d)\sin \lambda \cos \frac{\tilde{a}}{2f}  = (m_d-m_u) \cos\lambda \sin
+\frac{\tilde{a}}{2f}
+\end{align*}
+or 
+\begin{align*}
+    \tan \lambda &= \frac{m_d-m_u}{m_d + m_u} \tan \frac{\tilde{a}}{2f}\nonumber \\ 
+    \lambda &= \frac{m_d - m_u}{m_d + m_u} \tan \frac{\tilde{a}}{2f} +
+    \mathcal{O}\left(\frac{\tilde{a}}{2f}\right)^3\nonumber \\ 
+    &=  \frac{m_d - m_u}{m_d + m_u}\frac{\tilde{a}}{2f}+
+    \mathcal{O}\left(\frac{\tilde{a}}{2f}\right)^3.
+\end{align*}
+Now we removed $\lambda$ from our potential, and after some manipulations we shall see the
+mass term for the axion:
+\begin{align*}
+    V(\tilde{a}) &= -2v^3 \left\{m_u \cos\left[\lambda + \frac{\tilde{a}}{2f}\right] + m_d
+    \cos\left[\lambda - \frac{\tilde{a}}{2f}\right]\right\}\nonumber \\ 
+    &= -2v^3 \left\{m_u \cos \left[\left(\frac{m_d-m_u}{m_d+m_u} +1\right)
+    \frac{\tilde{a}}{2f}\right]  + m_d \cos \left[\left(\frac{m_d-m_u}{m_d+m_u}
+    -1\right) \frac{ \tilde{a}}{2f}\right] \right\}\nonumber \\ 
+    &= -2v^3 \left\{m_u \cos \left[\frac{m_d}{m_d+m_u}
+    \frac{\tilde{a}}{f}\right]  + m_d \cos \left[\frac{m_u}{m_d+m_u}
+    \frac{\tilde{a}}{f}\right]\right\},\nonumber \\ 
+    \intertext{Taylor expanding $\cos x \approx 1- x^2 /2 $:} 
+    &\approx v^3 \left\{m_u \left[\frac{m_d}{m_d+m_u} \frac{\tilde{a}}{f}\right]^2 + m_d
+    \left[\frac{m_u}{m_d+m_u} \frac{\tilde{a}}{f}\right]^2\right\} + \text{const}\nonumber \\ 
+    &= v^3 \frac{m_um_d}{m_u+m_d} \frac{\tilde{a}^2}{f^2} + \text{const}
+\end{align*}
+and we can read off the mass as $V \sim  m^2 \tilde{a}^2 /2$,
+\begin{align*}
+    m_a^2 = \frac{2v^3 m_um_d}{(m_u+m_d)f^2}.
+\end{align*}
+\item We have just found that $m_a \sim  1/f$, whereas in the 3rd point we showed $m_\Psi
+\sim  f$. Thus as $f$ increases, so will the mass of the new quark, whereas the axion mass
+will decrease. In our lagrangian we never actually see the axion field by itself, as it
+enters as a phase $a /f$. Thus any possible interaction coming out of this low-energy
+lagrangian will be proportional to  $1 /f$, which we can interpret as a coupling constant.
+Any coupling will carry this suppression (it is a suppression as $[f] = 1 $ today is constrained to  $f>10^{10}$
+GeV roughly).
+\end{enumerate}
+ 
+\end{document}
